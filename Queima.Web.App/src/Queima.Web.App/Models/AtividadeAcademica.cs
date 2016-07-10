@@ -14,6 +14,7 @@ namespace Queima.Web.App.Models
         [Required]
         public string Nome { get; set; }
         // Descrição da Atividade Académica
+        [Required]
         public string Descricao { get; set; }
         // Preço da Atividade Académica
         public decimal Preco { get; set; }
@@ -25,6 +26,8 @@ namespace Queima.Web.App.Models
 
         // Local da Atividade Académica
         public virtual Local Local { get; set; }
+        // Lista de pontos de venda
+        public List<PontoVenda> PontosDeVenda { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ namespace Queima.Web.App.Models
         public string Nome { get; set; }
         // Descrição do Ponto de Venda (Horário, como chegar, etc)
         public string Descricao { get; set; }
-
+        [Required]
         // Local do Ponto de Venda
         public virtual Local Local { get; set; }
     }

@@ -24,9 +24,11 @@ namespace Queima.Web.App.Models
         // Url para Spotify oficial do(a) Artista
         public string SpotifyUrl { get; set; }
         // Palco onde o(a) Artista atuará
+        [Required]
         public Palco Palco { get; set; }
 
         // Foto do(a) Artista
+        [Required]
         public virtual Imagem Foto { get; set; }
 
     }

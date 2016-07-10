@@ -18,6 +18,7 @@ namespace Queima.Web.App.Models
 
         // Foto da Barraca
         public virtual Imagem Foto { get; set; }
+        // Posição da Barraca
         public virtual Local Posicao { get; set; }
     }
 }
