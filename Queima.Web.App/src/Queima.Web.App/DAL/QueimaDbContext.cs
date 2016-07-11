@@ -26,5 +26,8 @@ namespace Queima.Web.App.DAL
         public DbSet<Concurso> Concursos { get; set; }
         public DbSet<MediaEdicao> MediaEdicoes { get; set; }
         public DbSet<Transporte> Transportes { get; set; }
+        public DbSet<Link> Links { get; set; }
+        public DbSet<Bilhete> Bilhetes { get; set; }
+
     }
 }

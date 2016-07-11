@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Queima.Web.App.Models;
 using Queima.Web.App.DAL;
+using Queima.Web.App.Interfaces;
 
 namespace Queima.Web.App
 {
@@ -31,11 +32,12 @@ namespace Queima.Web.App
         public void ConfigureServices(IServiceCollection services)
         {
             // Add DbContext
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Queima.Web.App.Db;Trusted_Connection=True;";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Queima.Web.App.Db2;Trusted_Connection=True;";
             services.AddDbContext<QueimaDbContext>(options => options.UseSqlServer(connection));
 
             // Add framework services.
             services.AddMvc();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,8 +21,10 @@ namespace Queima.Web.App.Models
         // Descrição do Concurso (condições, informações, etc)
         [Required]
         public string Descricao { get; set; }
-        // Imagem do concurso
+        // Imagem do Concurso
         public virtual Imagem Imagem { get; set; }
+        // Url do Concurso
+        public virtual Link WebLink { get; set; }
     }
 
     public enum TipoConcurso

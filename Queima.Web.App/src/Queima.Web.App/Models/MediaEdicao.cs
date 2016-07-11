@@ -15,7 +15,9 @@ namespace Queima.Web.App.Models
         public int Ano { get; set; }
         // Url para Facebook da FAP
         [Required]
-        public string Url { get; set; }
+        public Link UrlLink { get; set; }
+        // Título
+        public string Titulo { get; set; }
         // Tipo de media do conteúdo
         [Required]
         public TipoMedia TipoMedia { get; set; }

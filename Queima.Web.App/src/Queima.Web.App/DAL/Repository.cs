@@ -54,7 +54,7 @@ namespace Queima.Web.App.DAL
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
             return _db.Set<T>();
         }
