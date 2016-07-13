@@ -10,8 +10,6 @@ namespace Queima.Web.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<Artista> _repository;
         public IActionResult Index()
         {
             return View();

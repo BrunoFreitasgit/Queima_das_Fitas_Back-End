@@ -25,9 +25,8 @@ namespace Queima.Web.App.Models
         public virtual Imagem Imagem { get; set; }
 
         // Local da Atividade Académica
-        public virtual Local Local { get; set; }
+        public PontoInteresse Local { get; set; }
         // Lista de pontos de venda
-        public List<PontoVenda> PontosDeVenda { get; set; }
-
+        public List<PontoInteresse> PontosVenda { get; set; }
     }
 }

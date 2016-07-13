@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Queima.Web.App.DAL;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,7 +11,9 @@ namespace Queima.Web.App.Helpers
     {
         public static TEntity Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
         {
-            var context = ((IInfrastructure<IServiceProvider>)set).GetService<DbContext>();
+
+
+            var context = ((IInfrastructure<IServiceProvider>)set).GetService<QueimaDbContext>();
 
             var entityType = context.Model.FindEntityType(typeof(TEntity));
             var key = entityType.FindPrimaryKey();
