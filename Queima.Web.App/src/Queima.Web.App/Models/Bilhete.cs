@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Bilhete
     {
         // Id do Bilhete
-        public int BilheteId { get; set; }
+        public int Id { get; set; }
         // Dia do evento para qual o bilhete é destinado
         [Required]
         public DateTime Data { get; set; }

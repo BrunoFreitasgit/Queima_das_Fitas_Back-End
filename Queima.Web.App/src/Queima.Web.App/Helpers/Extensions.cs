@@ -1,20 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Queima.Web.App.DAL;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Queima.Web.App.Helpers
 {
     public static class Extensions
     {
-        public static TEntity Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
+        
+        public static async Task<TEntity> Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
         {
-
-
-            var context = ((IInfrastructure<IServiceProvider>)set).GetService<QueimaDbContext>();
-
+            var context = ((IInfrastructure<IServiceProvider>)set).GetService<IDbContextServices>().CurrentContext.Context;
+            
             var entityType = context.Model.FindEntityType(typeof(TEntity));
             var key = entityType.FindPrimaryKey();
 
@@ -45,7 +47,7 @@ namespace Queima.Web.App.Helpers
                     parameter));
 
             // Look in the database
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

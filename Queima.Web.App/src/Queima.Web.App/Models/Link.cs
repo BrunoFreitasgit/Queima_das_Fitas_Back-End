@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Link
     {
         // Id do Link
-        public int LinkId { get; set; }
+        public int Id { get; set; }
         // Url do link
         [Required]
         public string Url { get; set; }

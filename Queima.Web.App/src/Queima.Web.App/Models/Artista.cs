@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Artista
     {
         // Id do(a) Artista
-        public int ArtistaId { get; set; }
+        public int Id { get; set; }
         // Nome da Banda ou Artista
         [Required]
         public string Nome { get; set; }

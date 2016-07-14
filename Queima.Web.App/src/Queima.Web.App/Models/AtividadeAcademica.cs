@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class AtividadeAcademica
     {
         // Id da Atividade Académica
-        public int AtividadeAcademicaId { get; set; }
+        public int Id { get; set; }
         // Nome da Atividade Académica
         [Required]
         public string Nome { get; set; }

@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class MediaEdicao
     {
         // Id do objeto de conteúdos media
-        public int MediaEdicaoId { get; set; }
+        public int Id { get; set; }
         // Ano da edição
         [Required]
         public int Ano { get; set; }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Queima.Web.App.Models
 {
     public class PontoInteresse
     {
         // Id do Local
-        public int PontoInteresseID { get; set; }
+        public int Id { get; set; }
         // Nome/Rua do local
         [Required]
         public string Nome { get; set; }
@@ -20,16 +16,20 @@ namespace Queima.Web.App.Models
         // Coordenada Longitude do Local
         public double Longitude { get; set; }
         // Nome da rua completa ou outro texto descritivo do local
-        [Display(Name ="Descrição adicional do Local")]
+        [Display(Name = "Descrição adicional do Local")]
         public string DescricaoAdicional { get; set; }
         public TipoLocal Tipo { get; set; }
     }
 
     public enum TipoLocal
     {
+        [Display(Name = "Local Simples")]
         LocalSimples,
+        [Display(Name = "Ponto de Venda")]
         PontoDeVenda,
+        [Display(Name = "Barraca")]
         Barraca,
+        [Display(Name = "Atividade Académica")]
         AtividadeAcademica
     }
 }

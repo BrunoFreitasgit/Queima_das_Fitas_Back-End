@@ -32,12 +32,15 @@ namespace Queima.Web.App
         public void ConfigureServices(IServiceCollection services)
         {
             // Add DbContext
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Queima.Web.App.Db2;Trusted_Connection=True;";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Queima.Web.App.Db;Trusted_Connection=True;";
             services.AddDbContext<QueimaDbContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<IRepository<PontoInteresse>, PontosInteresseRepository>();
+           
 
+           
             // Add framework services.
             services.AddMvc();
+            services.AddLogging();
+            services.AddTransient(typeof(IGenericRepository<>), typeof(Repository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

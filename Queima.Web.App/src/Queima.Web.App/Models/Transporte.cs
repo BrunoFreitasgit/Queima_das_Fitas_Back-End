@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Transporte
     {
         // Id do Tranporte
-        public int TransporteId { get; set; }
+        public int Id { get; set; }
         // Nome do Tipo de Transporte (STCP, Metro ou Taxi)
         [Required]
         public TipoTransporte Nome { get; set; }

@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Concurso
     {
         // Id do Concurso
-        public int ConcursoId { get; set; }
+        public int Id { get; set; }
         // Tipo de Concurso
         public TipoConcurso TipoConcurso { get; set; }
         // Data de início do Concurso

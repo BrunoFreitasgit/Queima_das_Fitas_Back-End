@@ -9,7 +9,7 @@ namespace Queima.Web.App.Models
     public class Barraca
     {
         // Id da Barraca
-        public int BarracaId { get; set; }
+        public int Id { get; set; }
         // Nome da Barraca
         [Required]
         public string Nome { get; set; }

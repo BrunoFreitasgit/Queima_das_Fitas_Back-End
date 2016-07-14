@@ -13,28 +13,28 @@ namespace Queima.Web.App.Controllers
 {
     public class PontosInteresseController : Controller
     {
-        private PontosInteresseRepository _repo;
+        public IGenericRepository<PontoInteresse> _repository;
 
-        public PontosInteresseController(QueimaDbContext context)
+        public PontosInteresseController(IGenericRepository<PontoInteresse> repository)
         {
-            _repo = new PontosInteresseRepository(context);
+            _repository = repository;
         }
 
         // GET: PontosInteresse
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_repo.GetAll().ToList());
+            return View(await _repository.FindAll());
         }
 
         // GET: PontosInteresse/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pontoInteresse = _repo.GetById(id.Value);
+            var pontoInteresse = await _repository.Get(id.Value);
             if (pontoInteresse == null)
             {
                 return NotFound();
@@ -54,11 +54,11 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("PontoInteresseID,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresse pontoInteresse)
+        public async Task<IActionResult> Create([Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresse pontoInteresse)
         {
             if (ModelState.IsValid)
             {
-                _repo.Add(pontoInteresse);
+                await _repository.Save(pontoInteresse);
                 return RedirectToAction("Index");
             }
             return View(pontoInteresse);
@@ -72,7 +72,7 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            var pontoInteresse = _repo.GetById(id.Value);
+            var pontoInteresse = await _repository.Get(id.Value);
             if (pontoInteresse == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, [Bind("PontoInteresseID,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresse pontoInteresse)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresse pontoInteresse)
         {
-            if (id != pontoInteresse.PontoInteresseID)
+            if (id != pontoInteresse.Id)
             {
                 return NotFound();
             }
@@ -96,11 +96,11 @@ namespace Queima.Web.App.Controllers
             {
                 try
                 {
-                    _repo.Update(pontoInteresse);
+                    await _repository.Update(pontoInteresse);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PontoInteresseExists(pontoInteresse.PontoInteresseID))
+                    if (!PontoInteresseExists(pontoInteresse.Id))
                     {
                         return NotFound();
                     }
@@ -122,7 +122,7 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            var pontoInteresse = _repo.GetById(id.Value);
+            var pontoInteresse = await _repository.Get(id.Value);
             if (pontoInteresse == null)
             {
                 return NotFound();
@@ -136,18 +136,18 @@ namespace Queima.Web.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pontoInteresse = _repo.GetById(id);
-            _repo.Delete(pontoInteresse);
+            var pontoInteresse = await _repository.Get(id);
+            await _repository.Delete(pontoInteresse);
             return RedirectToAction("Index");
         }
 
         private bool PontoInteresseExists(int id)
         {
-            if (_repo.GetById(id) != null)
+            if (_repository.Get(id) == null)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
     }
 }

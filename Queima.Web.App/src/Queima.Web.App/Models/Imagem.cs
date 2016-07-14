@@ -8,7 +8,7 @@ namespace Queima.Web.App.Models
     public class Imagem
     {
         // Id da Imagem
-        public int ImagemId { get; set; }
+        public int Id { get; set; }
         // URL da Imagem
         public string URL { get; set; }
         // Array de bytes para guardar a Imagem
