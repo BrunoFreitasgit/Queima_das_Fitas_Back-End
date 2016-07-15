@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Queima.Web.App.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace Queima.Web.App.Models
 {
@@ -19,6 +20,12 @@ namespace Queima.Web.App.Models
         [Display(Name = "Descrição adicional do Local")]
         public string DescricaoAdicional { get; set; }
         public TipoLocal Tipo { get; set; }
+
+        public PontoInteresse()
+        {
+
+        }
+
     }
 
     public enum TipoLocal

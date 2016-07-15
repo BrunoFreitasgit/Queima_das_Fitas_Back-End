@@ -1,4 +1,4 @@
-@model Queima.Web.App.Models.PontoInteresse
+@model Queima.Web.App.ViewModels.PontoInteresseViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,10 +8,10 @@
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>PontoInteresse</h4>
+        <h4>PontoInteresseViewModel</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="DescricaoAdicional" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -22,7 +22,7 @@
         <div class="form-group">
             <label asp-for="Latitude" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Latitude" class="form-control"  />
+                <input asp-for="Latitude" class="form-control" />
                 <span asp-validation-for="Latitude" class="text-danger" />
             </div>
         </div>
@@ -43,8 +43,9 @@
         <div class="form-group">
             <label asp-for="Tipo" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="Tipo" 
-                        asp-items="Html.GetEnumSelectList<Queima.Web.App.Models.TipoLocal>()">>
+                <select asp-for="Tipo"
+                        asp-items="Html.GetEnumSelectList<Queima.Web.App.Models.TipoLocal>()">
+                    >
                 </select>
             </div>
         </div>

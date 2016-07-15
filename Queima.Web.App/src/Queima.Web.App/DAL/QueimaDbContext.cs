@@ -28,7 +28,6 @@ namespace Queima.Web.App.DAL
         public DbSet<Transporte> Transportes { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<Bilhete> Bilhetes { get; set; }
-
         public void EnsureSeedData()
         {
             if (!PontosInteresse.Any())
@@ -50,3 +49,4 @@ namespace Queima.Web.App.DAL
         }
     }
 }
+
