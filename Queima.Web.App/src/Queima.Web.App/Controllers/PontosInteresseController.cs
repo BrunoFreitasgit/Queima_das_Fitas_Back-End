@@ -74,9 +74,8 @@ namespace Queima.Web.App.Controllers
                 {
 
                     PontoInteresse ponto = new PontoInteresse();
-                    ponto.Id = pontoInteresseViewModel.Id;
                     ponto.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
-                    ponto.Latitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
+                    ponto.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
                     ponto.Nome = pontoInteresseViewModel.Nome;
                     ponto.Tipo = pontoInteresseViewModel.Tipo;
 

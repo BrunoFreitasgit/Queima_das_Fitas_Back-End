@@ -8,7 +8,7 @@ using Queima.Web.App.DAL;
 namespace Queima.Web.App.Migrations
 {
     [DbContext(typeof(QueimaDbContext))]
-    [Migration("20160714162539_Initial Schema")]
+    [Migration("20160717161832_Initial Schema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
