@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Queima.Web.App.Models;
 using System;
 using System.Collections.Generic;
@@ -12,36 +13,60 @@ namespace Queima.Web.App.ViewModels
 {
     public class AtividadeAcademicaViewModel
     {
-        public int AtividadeAcademicaId { get; set; }
+        public int Id { get; set; }
         [Required]
         [DisplayName("Nome/Título da Atividade Académica")]
         public string Nome { get; set; }
+
         [Required(ErrorMessage = "É necessária uma descrição textual da Atividade Académica")]
         [DisplayName("Descrição da atividade")]
         public string Descricao { get; set; }
+
         [Range(0.00, 100.00, ErrorMessage = "Preço tem que estar compreendido entre 0€ e 100€")]
         public decimal Preco { get; set; }
+
         [Display(Name = "Data de realização da Atividade Académica")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
-        [Required]
-        [DisplayName("Url da imagem")]
-        [Url]
-        public string ImagemUrl { get; set; }
-        [Required]
-        [DisplayName("Breve descrição da imagem")]
-        public string DescricaoImagem { get; set; }
-        [ScaffoldColumn(false)]
-        public int ImagemId { get; set; }
-        [DisplayName("Local de realização da Atividade Académica")]
-        public PontoInteresse Local { get; set; }
-        [DisplayName("Pontos de Venda")]
-        public List<PontoInteresse> PontosVendaId { get; set; }
 
+        [Required(ErrorMessage = "O ficheiro não é válido")]
+        [DataType(DataType.Upload)]
+        [FileExtensions(Extensions = "jpg,png,gif,jpeg,bmp,svg")]
+        public IFormFile Imagem { get; set; }
+
+        [DisplayName("Local de realização da Atividade Académica")]
+        public int SelectedPontoInteresseId { get; set; }
+
+        [DisplayName("Pontos de Venda")]
+        public int[] SelectedPontosVenda { get; set; }
+        
+        public List<PontoInteresse> PontosInteresse { get; set; }
+
+        public List<PontoInteresse> PontosVenda { get; set; }
 
         public AtividadeAcademicaViewModel()
         {
+
+        }
+        public AtividadeAcademicaViewModel(AtividadeAcademica atividade)
+        {
+            Id = atividade.Id;
+            Nome = atividade.Nome;
+            Descricao = atividade.Descricao;
+            Preco = atividade.Preco;
+            Data = atividade.Data;
+            SelectedPontoInteresseId = atividade.Local.Id;
+
+            int i = 0;
+            if(atividade.PontosVenda != null)
+            {
+                foreach (var item in atividade.PontosVenda)
+                { 
+                    SelectedPontosVenda[i] = item.Id;
+                    i++;
+                }
+            }
 
         }
     }

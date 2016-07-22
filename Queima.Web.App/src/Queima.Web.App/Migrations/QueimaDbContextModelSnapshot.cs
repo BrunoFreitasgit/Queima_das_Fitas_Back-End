@@ -27,7 +27,7 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<string>("FacebookUrl");
 
-                    b.Property<int?>("FotoId")
+                    b.Property<string>("ImagemPath")
                         .IsRequired();
 
                     b.Property<string>("Nome")
@@ -40,8 +40,6 @@ namespace Queima.Web.App.Migrations
                     b.Property<string>("TwitterUrl");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FotoId");
 
                     b.ToTable("Artistas");
                 });
@@ -56,7 +54,8 @@ namespace Queima.Web.App.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired();
 
-                    b.Property<int?>("ImagemId");
+                    b.Property<string>("ImagemPath")
+                        .IsRequired();
 
                     b.Property<int?>("LocalId");
 
@@ -66,8 +65,6 @@ namespace Queima.Web.App.Migrations
                     b.Property<decimal>("Preco");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImagemId");
 
                     b.HasIndex("LocalId");
 
@@ -81,7 +78,8 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<string>("FacebookEventUrl");
 
-                    b.Property<int?>("FotoId");
+                    b.Property<string>("ImagemPath")
+                        .IsRequired();
 
                     b.Property<string>("Nome")
                         .IsRequired();
@@ -89,8 +87,6 @@ namespace Queima.Web.App.Migrations
                     b.Property<int?>("PosicaoId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FotoId");
 
                     b.HasIndex("PosicaoId");
 
@@ -135,7 +131,8 @@ namespace Queima.Web.App.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired();
 
-                    b.Property<int?>("ImagemId");
+                    b.Property<string>("ImagemPath")
+                        .IsRequired();
 
                     b.Property<int>("TipoConcurso");
 
@@ -143,27 +140,9 @@ namespace Queima.Web.App.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImagemId");
-
                     b.HasIndex("WebLinkId");
 
                     b.ToTable("Concursos");
-                });
-
-            modelBuilder.Entity("Queima.Web.App.Models.Imagem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<byte[]>("ImagemData");
-
-                    b.Property<string>("URL");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Imagens");
                 });
 
             modelBuilder.Entity("Queima.Web.App.Models.Link", b =>
@@ -241,31 +220,18 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<int?>("ImagemId");
+                    b.Property<string>("ImagemPath")
+                        .IsRequired();
 
                     b.Property<int>("Nome");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImagemId");
-
                     b.ToTable("Transportes");
-                });
-
-            modelBuilder.Entity("Queima.Web.App.Models.Artista", b =>
-                {
-                    b.HasOne("Queima.Web.App.Models.Imagem", "Foto")
-                        .WithMany()
-                        .HasForeignKey("FotoId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Queima.Web.App.Models.AtividadeAcademica", b =>
                 {
-                    b.HasOne("Queima.Web.App.Models.Imagem", "Imagem")
-                        .WithMany()
-                        .HasForeignKey("ImagemId");
-
                     b.HasOne("Queima.Web.App.Models.PontoInteresse", "Local")
                         .WithMany()
                         .HasForeignKey("LocalId");
@@ -273,10 +239,6 @@ namespace Queima.Web.App.Migrations
 
             modelBuilder.Entity("Queima.Web.App.Models.Barraca", b =>
                 {
-                    b.HasOne("Queima.Web.App.Models.Imagem", "Foto")
-                        .WithMany()
-                        .HasForeignKey("FotoId");
-
                     b.HasOne("Queima.Web.App.Models.PontoInteresse", "Posicao")
                         .WithMany()
                         .HasForeignKey("PosicaoId");
@@ -291,10 +253,6 @@ namespace Queima.Web.App.Migrations
 
             modelBuilder.Entity("Queima.Web.App.Models.Concurso", b =>
                 {
-                    b.HasOne("Queima.Web.App.Models.Imagem", "Imagem")
-                        .WithMany()
-                        .HasForeignKey("ImagemId");
-
                     b.HasOne("Queima.Web.App.Models.Link", "WebLink")
                         .WithMany()
                         .HasForeignKey("WebLinkId");
@@ -320,13 +278,6 @@ namespace Queima.Web.App.Migrations
                     b.HasOne("Queima.Web.App.Models.AtividadeAcademica")
                         .WithMany("PontosVenda")
                         .HasForeignKey("AtividadeAcademicaId");
-                });
-
-            modelBuilder.Entity("Queima.Web.App.Models.Transporte", b =>
-                {
-                    b.HasOne("Queima.Web.App.Models.Imagem", "Imagem")
-                        .WithMany()
-                        .HasForeignKey("ImagemId");
                 });
         }
     }

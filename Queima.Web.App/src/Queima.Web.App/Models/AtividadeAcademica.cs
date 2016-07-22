@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,13 +21,18 @@ namespace Queima.Web.App.Models
         public decimal Preco { get; set; }
         // Data de realização da Atividade Académica
         public DateTime Data { get; set; }
-
         // Imagem da Atividade Académica
-        public virtual Imagem Imagem { get; set; }
-
+        [Required]
+        public string ImagemPath { get; set; }
         // Local da Atividade Académica
         public virtual PontoInteresse Local { get; set; }
         // Lista de pontos de venda
         public List<PontoInteresse> PontosVenda { get; set; }
+
+
+
+        // Imagem da Atividade Académica
+        //public virtual Imagem Imagem { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace Queima.Web.App.Models
         // Evento do Facebook associado à barraca
         public string FacebookEventUrl { get; set; }
         // Foto da Barraca
-        public virtual Imagem Foto { get; set; }
+        // Imagem teste
+        [Required]
+        public string ImagemPath { get; set; }
         // Posição da Barraca
         public virtual PontoInteresse Posicao { get; set; }
     }

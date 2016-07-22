@@ -19,7 +19,6 @@ namespace Queima.Web.App.DAL
 
         }
         public DbSet<PontoInteresse> PontosInteresse { get; set; }
-        public DbSet<Imagem> Imagens { get; set; }
         public DbSet<AtividadeAcademica> Atividades { get; set; }
         public DbSet<Barraca> Barracas { get; set; }
         public DbSet<Artista> Artistas { get; set; }

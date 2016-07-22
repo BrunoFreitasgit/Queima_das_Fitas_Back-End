@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using Queima.Web.App.Models;
 using Queima.Web.App.DAL;
 using Queima.Web.App.Interfaces;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Queima.Web.App
 {

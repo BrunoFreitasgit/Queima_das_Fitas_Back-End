@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,12 @@ namespace Queima.Web.App.Models
         // Descrição do serviço de Transporte
         public string Descricao { get; set; }
         // Imagem descritiva do Transporte
-        public virtual Imagem Imagem { get; set; }
+        [Required]
+        public string ImagemPath { get; set; }
+        public Transporte()
+        {
+            Links = new List<Link>();
+        }
     }
 
     // Tipos de Transporte 
@@ -29,3 +35,8 @@ namespace Queima.Web.App.Models
         Taxi
     }
 }
+// Imagem teste
+//[Required(ErrorMessage = "Please Upload a Valid Image File")]
+//[DataType(DataType.Upload)]
+//[FileExtensions(Extensions = "jpg,png,gif,jpeg,bmp,svg")]
+//public IFormFile ImagemTransporte { get; set; }

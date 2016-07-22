@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace Queima.Web.App.Models
         [Required]
         public string Descricao { get; set; }
         // Imagem do Concurso
-        public virtual Imagem Imagem { get; set; }
+        // Imagem teste
+        [Required]
+        public string ImagemPath { get; set; }
         // Url do Concurso
         public virtual Link WebLink { get; set; }
     }

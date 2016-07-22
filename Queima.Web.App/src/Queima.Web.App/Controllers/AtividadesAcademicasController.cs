@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Queima.Web.App.Models;
+using Queima.Web.App.Interfaces;
+using Queima.Web.App.ViewModels;
+
+namespace Queima.Web.App.Controllers
+{
+    public class AtividadesAcademicasController : Controller
+    {
+        public IGenericRepository<AtividadeAcademica> _repository;
+        public AtividadesAcademicasController(IGenericRepository<AtividadeAcademica> repository)
+        {
+            _repository = repository;
+        }
+        // GET: AtividadesAcademicas
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<AtividadeAcademica> lista = await _repository.FindAll();
+            var lista_vm = new List<AtividadeAcademicaViewModel>();
+
+            foreach (PontoInteresse pt in lista)
+            {
+                var vm = new PontoInteresseViewModel(pt);
+                lista_vm.Add(vm);
+            }
+            return View(lista_vm);
+        }
+
+        // GET: AtividadesAcademicas/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: AtividadesAcademicas/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: AtividadesAcademicas/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: AtividadesAcademicas/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: AtividadesAcademicas/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: AtividadesAcademicas/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: AtividadesAcademicas/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}

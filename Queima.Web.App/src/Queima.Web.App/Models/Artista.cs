@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,10 +27,9 @@ namespace Queima.Web.App.Models
         // Palco onde o(a) Artista atuará
         [Required]
         public Palco Palco { get; set; }
-
         // Foto do(a) Artista
         [Required]
-        public virtual Imagem Foto { get; set; }
+        public string ImagemPath { get; set; }
 
     }
 
