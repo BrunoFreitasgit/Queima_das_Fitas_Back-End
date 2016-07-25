@@ -20,7 +20,9 @@ namespace Queima.Web.App.Models
         // Imagem teste
         [Required]
         public string ImagemPath { get; set; }
+
         // Posição da Barraca
-        public virtual PontoInteresse Posicao { get; set; }
+        public int PontoInteresseId { get; set; }
+        public virtual PontoInteresse PontoInteresse { get; set; }
     }
 }

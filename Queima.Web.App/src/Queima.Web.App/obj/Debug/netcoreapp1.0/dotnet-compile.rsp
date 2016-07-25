@@ -14,6 +14,7 @@
 --informational-version:1.0.0
 --target-framework:.NETCoreApp,Version=v1.0
 --reference:C:\Users\BrunoFreitas\.nuget\packages\BundlerMinifier.Core\2.1.258\lib\netcoreapp1.0\dotnet-bundle.dll
+--reference:C:\Users\BrunoFreitas\.nuget\packages\ImageProcessorCore\1.0.0-alpha-934\lib\netstandard1.1\ImageProcessorCore.dll
 --reference:C:\Users\BrunoFreitas\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll
 --reference:C:\Users\BrunoFreitas\.nuget\packages\Microsoft.AspNetCore.Authorization\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authorization.dll
 --reference:C:\Users\BrunoFreitas\.nuget\packages\Microsoft.AspNetCore.Cors\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Cors.dll
@@ -227,8 +228,8 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\QueimaDbContext.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\Repository.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Helpers\Extensions.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Interfaces\IGenericRepository.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160722152631_Initial Schema.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160722152631_Initial Schema.Designer.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160725204303_Initial Schema.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160725204303_Initial Schema.Designer.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\QueimaDbContextModelSnapshot.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Artista.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\AtividadeAcademica.cs

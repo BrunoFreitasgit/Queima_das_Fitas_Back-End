@@ -15,7 +15,7 @@ namespace Queima.Web.App.Models
         [Required]
         public TipoTransporte Nome { get; set; }
         // Lista de links para informações adicionais
-        public List<Link> Links { get; set; }
+        public virtual List<Link> Links { get; set; }
         // Descrição do serviço de Transporte
         public string Descricao { get; set; }
         // Imagem descritiva do Transporte

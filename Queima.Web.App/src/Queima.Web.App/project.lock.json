@@ -17,6 +17,31 @@
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
         }
       },
+      "ImageProcessorCore/1.0.0-alpha-934": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.Compression": "4.1.0",
+          "System.Linq": "4.1.0",
+          "System.Numerics.Vectors": "4.1.1",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "System.Threading.Tasks.Parallel": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/ImageProcessorCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/ImageProcessorCore.dll": {}
+        }
+      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -4284,6 +4309,16 @@
         "lib/net452/dotnet-bundle.exe",
         "lib/netcoreapp1.0/dotnet-bundle.dll",
         "lib/netcoreapp1.0/dotnet-bundle.runtimeconfig.json"
+      ]
+    },
+    "ImageProcessorCore/1.0.0-alpha-934": {
+      "sha512": "3kyNVVF/NeXE5tKXe9kFthbUMYxVqZnd9v1IMUU988L6h7JxexioJL6fE9uPxZWYjGSjE799n6afaKsVg8YYWw==",
+      "type": "package",
+      "path": "ImageProcessorCore/1.0.0-alpha-934",
+      "files": [
+        "ImageProcessorCore.1.0.0-alpha-934.nupkg.sha512",
+        "ImageProcessorCore.nuspec",
+        "lib/netstandard1.1/ImageProcessorCore.dll"
       ]
     },
     "Libuv/1.9.0": {
@@ -10856,6 +10891,7 @@
   "projectFileDependencyGroups": {
     "": [
       "BundlerMinifier.Core >= 2.1.258",
+      "ImageProcessorCore >= 1.0.0-alpha-934",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.0.0",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",

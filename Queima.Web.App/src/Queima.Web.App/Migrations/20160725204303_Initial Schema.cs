@@ -122,16 +122,16 @@ namespace Queima.Web.App.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Ano = table.Column<int>(nullable: false),
+                    LinkId = table.Column<int>(nullable: false),
                     TipoMedia = table.Column<int>(nullable: false),
-                    Titulo = table.Column<string>(nullable: true),
-                    UrlLinkId = table.Column<int>(nullable: false)
+                    Titulo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MediaEdicoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MediaEdicoes_Links_UrlLinkId",
-                        column: x => x.UrlLinkId,
+                        name: "FK_MediaEdicoes_Links_LinkId",
+                        column: x => x.LinkId,
                         principalTable: "Links",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -164,19 +164,19 @@ namespace Queima.Web.App.Migrations
                     Data = table.Column<DateTime>(nullable: false),
                     Descricao = table.Column<string>(nullable: false),
                     ImagemPath = table.Column<string>(nullable: false),
-                    LocalId = table.Column<int>(nullable: true),
                     Nome = table.Column<string>(nullable: false),
+                    PontoInteresseId = table.Column<int>(nullable: false),
                     Preco = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Atividades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Atividades_PontosInteresse_LocalId",
-                        column: x => x.LocalId,
+                        name: "FK_Atividades_PontosInteresse_PontoInteresseId",
+                        column: x => x.PontoInteresseId,
                         principalTable: "PontosInteresse",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,9 +202,9 @@ namespace Queima.Web.App.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Atividades_LocalId",
+                name: "IX_Atividades_PontoInteresseId",
                 table: "Atividades",
-                column: "LocalId");
+                column: "PontoInteresseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Barracas_PosicaoId",
@@ -227,9 +227,9 @@ namespace Queima.Web.App.Migrations
                 column: "TransporteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MediaEdicoes_UrlLinkId",
+                name: "IX_MediaEdicoes_LinkId",
                 table: "MediaEdicoes",
-                column: "UrlLinkId");
+                column: "LinkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PontosInteresse_AtividadeAcademicaId",
@@ -248,7 +248,7 @@ namespace Queima.Web.App.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Atividades_PontosInteresse_LocalId",
+                name: "FK_Atividades_PontosInteresse_PontoInteresseId",
                 table: "Atividades");
 
             migrationBuilder.DropTable(

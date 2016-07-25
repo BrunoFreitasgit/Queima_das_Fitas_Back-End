@@ -57,16 +57,16 @@ namespace Queima.Web.App.Migrations
                     b.Property<string>("ImagemPath")
                         .IsRequired();
 
-                    b.Property<int?>("LocalId");
-
                     b.Property<string>("Nome")
                         .IsRequired();
+
+                    b.Property<int>("PontoInteresseId");
 
                     b.Property<decimal>("Preco");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocalId");
+                    b.HasIndex("PontoInteresseId");
 
                     b.ToTable("Atividades");
                 });
@@ -174,16 +174,15 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<int>("Ano");
 
+                    b.Property<int>("LinkId");
+
                     b.Property<int>("TipoMedia");
 
                     b.Property<string>("Titulo");
 
-                    b.Property<int?>("UrlLinkId")
-                        .IsRequired();
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UrlLinkId");
+                    b.HasIndex("LinkId");
 
                     b.ToTable("MediaEdicoes");
                 });
@@ -232,9 +231,10 @@ namespace Queima.Web.App.Migrations
 
             modelBuilder.Entity("Queima.Web.App.Models.AtividadeAcademica", b =>
                 {
-                    b.HasOne("Queima.Web.App.Models.PontoInteresse", "Local")
+                    b.HasOne("Queima.Web.App.Models.PontoInteresse", "PontoInteresse")
                         .WithMany()
-                        .HasForeignKey("LocalId");
+                        .HasForeignKey("PontoInteresseId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Queima.Web.App.Models.Barraca", b =>
@@ -267,9 +267,9 @@ namespace Queima.Web.App.Migrations
 
             modelBuilder.Entity("Queima.Web.App.Models.MediaEdicao", b =>
                 {
-                    b.HasOne("Queima.Web.App.Models.Link", "UrlLink")
+                    b.HasOne("Queima.Web.App.Models.Link", "Link")
                         .WithMany()
-                        .HasForeignKey("UrlLinkId")
+                        .HasForeignKey("LinkId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

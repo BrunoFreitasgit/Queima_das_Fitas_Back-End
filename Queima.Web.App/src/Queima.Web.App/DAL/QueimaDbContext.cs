@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Queima.Web.App.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Queima.Web.App.DAL
 {
@@ -27,7 +28,7 @@ namespace Queima.Web.App.DAL
         public DbSet<Transporte> Transportes { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<Bilhete> Bilhetes { get; set; }
-        public void EnsureSeedData()
+        public void EnsureSeedData(IHostingEnvironment env)
         {
             if (!PontosInteresse.Any())
             {
@@ -43,6 +44,25 @@ namespace Queima.Web.App.DAL
                     new PontoInteresse { Nome = "Queimódromo", Latitude = 41.17346102935757, Longitude = -8.68374690413475, Tipo = TipoLocal.PontoDeVenda },
                     new PontoInteresse { Nome = "El Corte Inglés", Latitude = 41.125627, Longitude = -8.604804999999942, Tipo = TipoLocal.PontoDeVenda }
                 );
+                SaveChanges();
+            }
+            if (!Atividades.Any())
+            {
+                List<PontoInteresse> pontos = PontosInteresse.Where(x => x.Tipo == TipoLocal.AtividadeAcademica).ToList();
+                List<PontoInteresse> pontos_venda = PontosInteresse.Where(x => x.Tipo == TipoLocal.PontoDeVenda).ToList();
+                Atividades.AddRange(
+                    new AtividadeAcademica
+                    {
+                        Data = new DateTime(2016, 02, 01),
+                        Descricao = "Descrição teste",
+                        PontoInteresse = pontos.ElementAt(0),
+                        Nome = "Sarau Cultural",
+                        PontosVenda = pontos_venda,
+                        ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
+                        PontoInteresseId = pontos.ElementAt(0).Id,
+                        Preco = 3.00m
+                    }
+                    );
                 SaveChanges();
             }
         }

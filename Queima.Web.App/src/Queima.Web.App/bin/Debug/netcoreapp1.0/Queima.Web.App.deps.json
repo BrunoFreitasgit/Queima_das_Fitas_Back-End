@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "febc9a666b98f08353fbebab8db205b3e7b69bf2"
+    "signature": "b7a0a0fe528a8b4e09cc436791ffb124249cf20f"
   },
   "compilationOptions": {
     "defines": [
@@ -32,6 +32,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
           "BundlerMinifier.Core": "2.1.258",
+          "Microsoft.EntityFrameworkCore": "1.0.0",
           "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration.Tools": "1.0.0-preview2-final",
@@ -39,7 +40,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Core": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "1.0.0-preview2-final",
-          "Microsoft.EntityFrameworkCore": "1.0.0"
+          "ImageProcessorCore": "1.0.0-alpha-934"
         },
         "runtime": {
           "Queima.Web.App.dll": {}
@@ -59,6 +60,30 @@
         },
         "compile": {
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        }
+      },
+      "ImageProcessorCore/1.0.0-alpha-934": {
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.Compression": "4.1.0",
+          "System.Linq": "4.1.0",
+          "System.Numerics.Vectors": "4.1.1",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "System.Threading.Tasks.Parallel": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.1/ImageProcessorCore.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.1/ImageProcessorCore.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.0.0": {
@@ -3655,6 +3680,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-dHTcSnKRM2Dvk1s2eCLU8U1WCxLlfk4y0GQlBUFaHaLt1NN1JhxJeDhhVo6jqKhHZsBaY7Cz04UYuKrKSwItZQ=="
+    },
+    "ImageProcessorCore/1.0.0-alpha-934": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3kyNVVF/NeXE5tKXe9kFthbUMYxVqZnd9v1IMUU988L6h7JxexioJL6fE9uPxZWYjGSjE799n6afaKsVg8YYWw=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.0": {
       "type": "package",

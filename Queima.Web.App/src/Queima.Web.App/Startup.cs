@@ -60,7 +60,7 @@ namespace Queima.Web.App
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                .CreateScope())
                 {
-                    serviceScope.ServiceProvider.GetService<QueimaDbContext>().EnsureSeedData();
+                    serviceScope.ServiceProvider.GetService<QueimaDbContext>().EnsureSeedData(env);
                 }
             }
             else
