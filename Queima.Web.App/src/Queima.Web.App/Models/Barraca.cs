@@ -23,6 +23,6 @@ namespace Queima.Web.App.Models
 
         // Posição da Barraca
         public int PontoInteresseId { get; set; }
-        public virtual PontoInteresse PontoInteresse { get; set; }
+        public PontoInteresse PontoInteresse { get; set; }
     }
 }

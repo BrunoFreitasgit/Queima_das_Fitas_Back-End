@@ -1,14 +1,16 @@
-﻿using Queima.Web.App.ViewModels;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Queima.Web.App.Models
 {
-    public class PontoInteresse
+    public class PontoVenda
     {
-        // Id do Local
+        // Id do Ponto de Venda
         public int Id { get; set; }
-        // Nome/Rua do local
-        [Required]
+        // Nome do Ponto de Venda
         public string Nome { get; set; }
         // Coordenada Latitude do Local
         [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
@@ -16,19 +18,13 @@ namespace Queima.Web.App.Models
         // Coordenada Longitude do Local
         [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
         public double Longitude { get; set; }
-        public TipoLocal Tipo { get; set; }
+        // Horário
+        [Display(Name = "Descrição adicional do Local (Horário, dias abertos ao público")]
+        public string DescricaoAdicional { get; set; }
 
-        public PontoInteresse()
+        public PontoVenda()
         {
 
         }
-    }
-
-    public enum TipoLocal
-    {
-        [Display(Name = "Barraca")]
-        Barraca,
-        [Display(Name = "Atividade Académica")]
-        AtividadeAcademica
     }
 }

@@ -19,7 +19,7 @@ namespace Queima.Web.App.ViewModels
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "É necessária uma descrição textual da Atividade Académica")]
-        [Display(Name ="Descrição da atividade")]
+        [Display(Name = "Descrição da atividade")]
         public string Descricao { get; set; }
 
         [Range(0.00, 100.00, ErrorMessage = "Preço tem que estar compreendido entre 0€ e 100€")]
@@ -35,14 +35,14 @@ namespace Queima.Web.App.ViewModels
         [FileExtensions(Extensions = "jpg,png,jpeg")]
         public IFormFile Imagem { get; set; }
 
-        
+
         public int SelectedLocalId { get; set; }
         [Display(Name = "Local de realização da Atividade Académica")]
         public PontoInteresse SelectedLocal { get; set; }
-        
-        [Display(Name ="Pontos de Venda")]
+
+        [Display(Name = "Pontos de Venda")]
         public int[] SelectedPontosVenda { get; set; }
-        
+
         public List<PontoInteresse> PontosInteresse { get; set; }
 
         public List<PontoInteresse> PontosVenda { get; set; }
@@ -60,11 +60,17 @@ namespace Queima.Web.App.ViewModels
             Data = atividade.Data;
             SelectedLocalId = atividade.PontoInteresseId;
 
+            if (atividade.PontoInteresse != null)
+            {
+                SelectedLocal = atividade.PontoInteresse;
+            }
+
             int i = 0;
-            if(atividade.PontosVenda != null)
+
+            if (atividade.PontosVenda != null)
             {
                 foreach (var item in atividade.PontosVenda)
-                { 
+                {
                     SelectedPontosVenda[i] = item.Id;
                     i++;
                 }

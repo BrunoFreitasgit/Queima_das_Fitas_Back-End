@@ -27,7 +27,8 @@ namespace Queima.Web.App.Models
         [Required]
         public string ImagemPath { get; set; }
         // Url do Concurso
-        public virtual Link WebLink { get; set; }
+        public int LinkId { get; set; }
+        public Link Link { get; set; }
     }
 
     public enum TipoConcurso

@@ -15,8 +15,10 @@ namespace Queima.Web.App.Models
         [Required]
         public string Nome { get; set; }
         // Biografia do(a) Artista
+        [Required]
         public string  Biografia { get; set; }
         // Data de atuação do(a) Artista
+        [Required]
         public DateTime DataAtuacao { get; set; }
         // Url para Facebook oficial do(a) Artista
         public string FacebookUrl { get; set; }
@@ -36,7 +38,9 @@ namespace Queima.Web.App.Models
     // Palcos existentes
     public enum Palco
     {
+        [Display(Name = "Palco Principal")]
         PalcoPrincipal,
+        [Display(Name = "Discoteca")]
         Disoteca
     }
 }

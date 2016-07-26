@@ -27,11 +27,15 @@ namespace Queima.Web.App.Models
         // Id do Local de realização da Atividade Académica
         public int PontoInteresseId { get; set; }
         // Local da Atividade Académica
-        public virtual PontoInteresse PontoInteresse { get; set; }
+        public PontoInteresse PontoInteresse { get; set; }
         // Lista de pontos de venda
-        public List<PontoInteresse> PontosVenda { get; set; }
 
+        public List<PontoVenda> PontosVenda { get; set; }
 
+        public AtividadeAcademica()
+        {
+            PontosVenda = new List<PontoVenda>();
+        }
         // Imagem da Atividade Académica
         //public virtual Imagem Imagem { get; set; }
 

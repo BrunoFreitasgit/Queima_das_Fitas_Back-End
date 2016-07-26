@@ -128,8 +128,6 @@ namespace Queima.Web.App.Controllers
             {
                 try
                 {
-
-                    pontoInteresse.DescricaoAdicional = pontoInteresseViewModel.DescricaoAdicional;
                     pontoInteresse.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
                     pontoInteresse.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
                     pontoInteresse.Nome = pontoInteresseViewModel.Nome;

@@ -31,7 +31,6 @@ namespace Queima.Web.App.ViewModels
             Nome = pt.Nome;
             Latitude = pt.Latitude.ToString();
             Longitude = pt.Longitude.ToString();
-            DescricaoAdicional = pt.DescricaoAdicional;
             Tipo = pt.Tipo;
         }
     }

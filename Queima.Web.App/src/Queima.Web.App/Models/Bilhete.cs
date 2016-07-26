@@ -26,8 +26,11 @@ namespace Queima.Web.App.Models
         [Required]
         public decimal PrecoNoDiaForaHoras { get; set; }
         // Link para bilheteira online 
-        public Link LinkBilheteira { get; set; }
-        // Condições e informações adicionais
-        public string Condicoes { get; set; }
+        public int LinkId { get; set; }
+        public Link Link { get; set; }
+
+        // Bilheteira
+        public int BilheteiraId { get; set; }
+        public Bilheteira Bilheteira { get; set; }
     }
 }

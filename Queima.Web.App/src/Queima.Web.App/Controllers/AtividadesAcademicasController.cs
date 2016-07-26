@@ -67,7 +67,7 @@ namespace Queima.Web.App.Controllers
             }
             if(vm.PontosVenda != null)
             {
-
+               
             }
             return View(vm);
         }

@@ -14,8 +14,9 @@ namespace Queima.Web.App.Models
         // Nome do Tipo de Transporte (STCP, Metro ou Taxi)
         [Required]
         public TipoTransporte Nome { get; set; }
-        // Lista de links para informações adicionais
-        public virtual List<Link> Links { get; set; }
+        public int LinkId { get; set; }
+        // Link para informações adicionais
+        public Link Link { get; set; }
         // Descrição do serviço de Transporte
         public string Descricao { get; set; }
         // Imagem descritiva do Transporte
@@ -23,7 +24,7 @@ namespace Queima.Web.App.Models
         public string ImagemPath { get; set; }
         public Transporte()
         {
-            Links = new List<Link>();
+
         }
     }
 
