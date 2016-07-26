@@ -74,6 +74,20 @@ namespace Queima.Web.App.DAL
                     );
                 SaveChanges();
             }
+            if (!Artistas.Any())
+            {
+                Artistas.Add(
+                    new Artista
+                    {
+                        Nome = "Dumitri Basiul",
+                        Biografia = "Dima tinha 12 anos quando começou a estudar música clássica. Depois disso emigrou para a Gronelândia",
+                        DataAtuacao = new DateTime(2016, 05, 12),
+                        ImagemPath = env.WebRootPath + "\\imagens\\artistas\\Borgore.jpg",
+                        Palco = Palco.PalcoPrincipal,
+                    }
+                    );
+                SaveChanges();
+            }
         }
     }
 }
