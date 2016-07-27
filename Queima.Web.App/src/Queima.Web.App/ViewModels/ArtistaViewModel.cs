@@ -23,7 +23,8 @@ namespace Queima.Web.App.ViewModels
         // Data de atuação do(a) Artista
         [Required]
         [Display(Name = "Dia da atuação")]
-        public DateTime DataAtuacao { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public string DataAtuacao { get; set; }
         [Display(Name = "Facebook Url")]
         // Url para Facebook oficial do(a) Artista
         public string FacebookUrl { get; set; }
@@ -48,7 +49,7 @@ namespace Queima.Web.App.ViewModels
             Id = a.Id;
             Nome = a.Nome;
             Biografia = a.Biografia;
-            DataAtuacao = a.DataAtuacao;
+            DataAtuacao = string.Concat(a.DataAtuacao.Day + "/" + a.DataAtuacao.Month + "/" + a.DataAtuacao.Year);
             FacebookUrl = a.FacebookUrl;
             TwitterUrl = a.TwitterUrl;
             SpotifyUrl = a.SpotifyUrl;

@@ -1,5 +1,5 @@
-@model Queima.Web.App.ViewModels.ArtistaViewModel
-
+﻿@model Queima.Web.App.ViewModels.ArtistaViewModel
+<meta charset="utf-8" />
 @{
     ViewData["Title"] = "Editar Artista";
 }
@@ -12,6 +12,7 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="FilePath" />
         <div class="form-group">
             <label asp-for="Nome" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -60,7 +61,7 @@
                 <span asp-validation-for="TwitterUrl" class="text-danger" />
             </div>
         </div>
-        <img src="@Url.Content(Model.FilePath)" alt="N�o tem nenhuma imagem associada" asp-append-version="true" /> />
+        <img src="@Url.Content(Model.FilePath)" alt="Não tem nenhuma imagem associada" asp-append-version="true" />
         <div class="form-group">
             <label asp-for="Imagem" class="control-label col-md-2"></label>
             <div>
@@ -81,5 +82,11 @@
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DataAtuacao").datepicker({ dateFormat: 'dd/mm/yy' });
+
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

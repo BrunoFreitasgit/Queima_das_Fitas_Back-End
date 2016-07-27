@@ -1,8 +1,10 @@
 @model Queima.Web.App.ViewModels.ArtistaViewModel
-
+<meta charset="utf-8" />
 @{
     ViewData["Title"] = "Criar Artista";
 }
+
+
 
 <h2>Criar Artista</h2>
 
@@ -80,5 +82,11 @@
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DataAtuacao").datepicker({ dateFormat: 'dd/mm/yy' });
+
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

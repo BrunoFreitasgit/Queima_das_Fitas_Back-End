@@ -71,7 +71,7 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl")] ArtistaViewModel vm, IFormFile Imagem)
+        public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
         {
             Artista new_artista = new Artista();
             if (ModelState.IsValid && Imagem != null && Imagem.Length > 0 && VerifyFileSize(Imagem) && VerifyFileExtension(Imagem.FileName))
@@ -86,7 +86,7 @@ namespace Queima.Web.App.Controllers
 
                 new_artista.Nome = vm.Nome;
                 new_artista.Biografia = vm.Biografia;
-                new_artista.DataAtuacao = vm.DataAtuacao;
+                new_artista.DataAtuacao = DateTime.Parse(vm.DataAtuacao);
                 new_artista.FacebookUrl = vm.FacebookUrl;
                 new_artista.TwitterUrl = vm.TwitterUrl;
                 new_artista.SpotifyUrl = vm.SpotifyUrl;
@@ -123,7 +123,7 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl")] ArtistaViewModel vm, IFormFile Imagem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
         {
             if (id != vm.Id)
             {
@@ -157,7 +157,7 @@ namespace Queima.Web.App.Controllers
 
                     artista.Nome = vm.Nome;
                     artista.Biografia = vm.Biografia;
-                    artista.DataAtuacao = vm.DataAtuacao;
+                    artista.DataAtuacao = DateTime.Parse(vm.DataAtuacao);
                     artista.FacebookUrl = vm.FacebookUrl;
                     artista.TwitterUrl = vm.TwitterUrl;
                     artista.SpotifyUrl = vm.SpotifyUrl;
@@ -194,8 +194,9 @@ namespace Queima.Web.App.Controllers
             {
                 return NotFound();
             }
+            var vm = new ArtistaViewModel(artista);
 
-            return View(artista);
+            return View(vm);
         }
 
         // POST: Artistas/Delete/5
