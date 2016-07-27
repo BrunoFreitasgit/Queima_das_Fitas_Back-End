@@ -49,8 +49,10 @@ namespace Queima.Web.App.Controllers
             {
                 return NotFound();
             }
-
-            return View(artista);
+            ArtistaViewModel vm = new ArtistaViewModel(artista);
+            ViewBag.FilePath = vm.FilePath;
+            ViewBag.Alt = vm.Nome;
+            return View(vm);
         }
 
         // GET: Artistas/Create

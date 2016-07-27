@@ -17,7 +17,7 @@
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
         }
       },
-      "ImageProcessorCore/1.0.0-alpha-934": {
+      "ImageProcessorCore/1.0.0-alpha-941": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -4311,12 +4311,12 @@
         "lib/netcoreapp1.0/dotnet-bundle.runtimeconfig.json"
       ]
     },
-    "ImageProcessorCore/1.0.0-alpha-934": {
-      "sha512": "3kyNVVF/NeXE5tKXe9kFthbUMYxVqZnd9v1IMUU988L6h7JxexioJL6fE9uPxZWYjGSjE799n6afaKsVg8YYWw==",
+    "ImageProcessorCore/1.0.0-alpha-941": {
+      "sha512": "EnlHQpHkUyo3T8TVTKwxxoZmEFUDj9msK0n4NPik91HzGnhJ6whIvFa82CeSgbUY6V9IIDEerz6T5r8ufVI6fg==",
       "type": "package",
-      "path": "ImageProcessorCore/1.0.0-alpha-934",
+      "path": "ImageProcessorCore/1.0.0-alpha-941",
       "files": [
-        "ImageProcessorCore.1.0.0-alpha-934.nupkg.sha512",
+        "ImageProcessorCore.1.0.0-alpha-941.nupkg.sha512",
         "ImageProcessorCore.nuspec",
         "lib/netstandard1.1/ImageProcessorCore.dll"
       ]
@@ -10891,7 +10891,7 @@
   "projectFileDependencyGroups": {
     "": [
       "BundlerMinifier.Core >= 2.1.258",
-      "ImageProcessorCore >= 1.0.0-alpha-934",
+      "ImageProcessorCore >= 1.0.0-alpha-941",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.0.0",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",

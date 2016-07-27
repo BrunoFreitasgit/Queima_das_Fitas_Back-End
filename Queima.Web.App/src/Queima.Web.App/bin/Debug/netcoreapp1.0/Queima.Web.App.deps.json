@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "b7a0a0fe528a8b4e09cc436791ffb124249cf20f"
+    "signature": "71a2bde8a56edec2cf82102f5fa4be02acc7d6ba"
   },
   "compilationOptions": {
     "defines": [
@@ -40,7 +40,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Core": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "1.0.0-preview2-final",
           "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "1.0.0-preview2-final",
-          "ImageProcessorCore": "1.0.0-alpha-934"
+          "ImageProcessorCore": "1.0.0-alpha-941"
         },
         "runtime": {
           "Queima.Web.App.dll": {}
@@ -62,7 +62,7 @@
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
         }
       },
-      "ImageProcessorCore/1.0.0-alpha-934": {
+      "ImageProcessorCore/1.0.0-alpha-941": {
         "dependencies": {
           "System.Collections": "4.0.11",
           "System.Diagnostics.Debug": "4.0.11",
@@ -3681,10 +3681,10 @@
       "serviceable": true,
       "sha512": "sha512-dHTcSnKRM2Dvk1s2eCLU8U1WCxLlfk4y0GQlBUFaHaLt1NN1JhxJeDhhVo6jqKhHZsBaY7Cz04UYuKrKSwItZQ=="
     },
-    "ImageProcessorCore/1.0.0-alpha-934": {
+    "ImageProcessorCore/1.0.0-alpha-941": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3kyNVVF/NeXE5tKXe9kFthbUMYxVqZnd9v1IMUU988L6h7JxexioJL6fE9uPxZWYjGSjE799n6afaKsVg8YYWw=="
+      "sha512": "sha512-EnlHQpHkUyo3T8TVTKwxxoZmEFUDj9msK0n4NPik91HzGnhJ6whIvFa82CeSgbUY6V9IIDEerz6T5r8ufVI6fg=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.0": {
       "type": "package",

@@ -23,13 +23,13 @@ namespace Queima.Web.App.ViewModels
         [Required]
         [Display(Name = "Dia da atuação")]
         public DateTime DataAtuacao { get; set; }
-        [Display(Name = "Link para a página de Facebook do artista")]
+        [Display(Name = "Facebook Url")]
         // Url para Facebook oficial do(a) Artista
         public string FacebookUrl { get; set; }
-        [Display(Name = "Link para a página do Twitter do artista")]
+        [Display(Name = "Twitter Url")]
         // Url para Twitter oficial do(a) Artista
         public string TwitterUrl { get; set; }
-        [Display(Name = "Link para a página do Spotify do artista")]
+        [Display(Name = "Spotify Url")]
         // Url para Spotify oficial do(a) Artista
         public string SpotifyUrl { get; set; }
         // Palco onde o(a) Artista atuará

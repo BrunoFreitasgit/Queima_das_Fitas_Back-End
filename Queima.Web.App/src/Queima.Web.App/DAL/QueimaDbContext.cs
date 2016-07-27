@@ -82,7 +82,7 @@ namespace Queima.Web.App.DAL
                         Nome = "Dumitri Basiul",
                         Biografia = "Dima tinha 12 anos quando começou a estudar música clássica. Depois disso emigrou para a Gronelândia",
                         DataAtuacao = new DateTime(2016, 05, 12),
-                        ImagemPath = env.WebRootPath + "\\imagens\\artistas\\Borgore.jpg",
+                        ImagemPath = "\\imagens\\artistas\\Borgore.jpg",
                         Palco = Palco.PalcoPrincipal,
                     }
                     );

@@ -1,39 +1,15 @@
-@model Queima.Web.App.Models.Artista
+@model Queima.Web.App.ViewModels.ArtistaViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
     <h4>Artista</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Biografia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Biografia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataAtuacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataAtuacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FacebookUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FacebookUrl)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagemPath)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImagemPath)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
@@ -45,6 +21,24 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Palco)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataAtuacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataAtuacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Biografia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Biografia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FacebookUrl)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.SpotifyUrl)
@@ -59,6 +53,8 @@
             @Html.DisplayFor(model => model.TwitterUrl)
         </dd>
     </dl>
+    <h3> Imagem </h3>
+    <img src="@Url.Content(Model.FilePath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
