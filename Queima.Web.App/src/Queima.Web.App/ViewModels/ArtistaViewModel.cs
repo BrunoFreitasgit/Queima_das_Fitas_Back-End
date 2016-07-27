@@ -17,6 +17,7 @@ namespace Queima.Web.App.ViewModels
         public string Nome { get; set; }
         // Biografia do(a) Artista
         [Required]
+        [MaxLength(5000)]
         [Display(Name = "Biografia do(a) Artista")]
         public string Biografia { get; set; }
         // Data de atuação do(a) Artista
@@ -36,7 +37,9 @@ namespace Queima.Web.App.ViewModels
         [Required]
         public Palco Palco { get; set; }
         // Foto do(a) Artista
-        [Required]
+        [DataType(DataType.Upload)]
+        [Display(Name = "Imagem do(a) Artista")]
+        [FileExtensions(Extensions = "jpg,png,jpeg")]
         public IFormFile Imagem { get; set; }
         public string FilePath { get; set; }
 
@@ -51,6 +54,10 @@ namespace Queima.Web.App.ViewModels
             SpotifyUrl = a.SpotifyUrl;
             Palco = a.Palco;
             FilePath = a.ImagemPath;
+        }
+        public ArtistaViewModel()
+        {
+
         }
     }
 }

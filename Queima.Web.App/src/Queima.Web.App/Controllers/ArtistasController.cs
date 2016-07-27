@@ -10,16 +10,21 @@ using Queima.Web.App.Models;
 using Queima.Web.App.Interfaces;
 using Queima.Web.App.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Net.Http.Headers;
+using System.IO;
 
 namespace Queima.Web.App.Controllers
 {
     public class ArtistasController : Controller
     {
         public IGenericRepository<Artista> _repository;
+        private IHostingEnvironment _env;
 
-        public ArtistasController(IGenericRepository<Artista> repository)
+        public ArtistasController(IGenericRepository<Artista> repository, IHostingEnvironment env)
         {
             _repository = repository;
+            _env = env;
         }
 
         // GET: Artistas
@@ -66,14 +71,32 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,ImagemPath,Nome,Palco,SpotifyUrl,TwitterUrl")] Artista artista)
+        public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl")] ArtistaViewModel vm, IFormFile Imagem)
         {
-            if (ModelState.IsValid)
+            Artista new_artista = new Artista();
+            if (ModelState.IsValid && Imagem != null && Imagem.Length > 0 && VerifyFileSize(Imagem) && VerifyFileExtension(Imagem.FileName))
             {
-                await _repository.Save(artista);
+                var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
+
+                // guardar imagem
+                using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
+                {
+                    await Imagem.CopyToAsync(fileStream);
+                }
+
+                new_artista.Nome = vm.Nome;
+                new_artista.Biografia = vm.Biografia;
+                new_artista.DataAtuacao = vm.DataAtuacao;
+                new_artista.FacebookUrl = vm.FacebookUrl;
+                new_artista.TwitterUrl = vm.TwitterUrl;
+                new_artista.SpotifyUrl = vm.SpotifyUrl;
+                new_artista.Palco = vm.Palco;
+                new_artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
+                await _repository.Save(new_artista);
+
                 return RedirectToAction("Index");
             }
-            return View(artista);
+            return View(new_artista);
         }
 
         // GET: Artistas/Edit/5
@@ -89,7 +112,10 @@ namespace Queima.Web.App.Controllers
             {
                 return NotFound();
             }
-            return View(artista);
+
+            var vm = new ArtistaViewModel(artista);
+
+            return View(vm);
         }
 
         // POST: Artistas/Edit/5
@@ -97,17 +123,46 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,ImagemPath,Nome,Palco,SpotifyUrl,TwitterUrl")] Artista artista)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl")] ArtistaViewModel vm, IFormFile Imagem)
         {
-            if (id != artista.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
-
+            Artista artista = await _repository.Get(id);
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // editar imagem
+                    if (Imagem != null && Imagem.Length > 0 && VerifyFileSize(Imagem) && VerifyFileExtension(Imagem.FileName))
+                    {
+                        var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
+
+                        // guardar imagem
+                        using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
+                        {
+                            await Imagem.CopyToAsync(fileStream);
+                        }
+                        // apagar imagem antiga
+                        var path = Path.Combine(upload, vm.FilePath);
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                        artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
+                    }
+
+                    // apagar imagem antiga
+
+                    artista.Nome = vm.Nome;
+                    artista.Biografia = vm.Biografia;
+                    artista.DataAtuacao = vm.DataAtuacao;
+                    artista.FacebookUrl = vm.FacebookUrl;
+                    artista.TwitterUrl = vm.TwitterUrl;
+                    artista.SpotifyUrl = vm.SpotifyUrl;
+                    artista.Palco = vm.Palco;
+
                     await _repository.Update(artista);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -150,19 +205,21 @@ namespace Queima.Web.App.Controllers
         {
             var artista = await _repository.Get(id);
             await _repository.Delete(artista);
-            
+
             return RedirectToAction("Index");
         }
 
         private bool ArtistaExists(int id)
         {
-            if(_repository.Get(id) != null)
+            if (_repository.Get(id) != null)
             {
                 return true;
             }
             return false;
         }
 
+
+        // TODO MUDAR DE SITIO
         private bool VerifyFileSize(IFormFile file)
         {
             Double fileSize = 0;
@@ -174,6 +231,11 @@ namespace Queima.Web.App.Controllers
 
             //filesize less than 1MB => true, else => false
             return (fileSize < 1024) ? true : false;
+        }
+        private bool VerifyFileExtension(string path)
+        {
+            var AllowedExtensions = new string[] { ".jpg", ".png", ".jpeg" };
+            return AllowedExtensions.Contains(Path.GetExtension(path));
         }
 
     }
