@@ -12,11 +12,11 @@ namespace Queima.Web.App.Helpers
 {
     public static class Extensions
     {
-        
+
         public static async Task<TEntity> Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
         {
             var context = ((IInfrastructure<IServiceProvider>)set).GetService<IDbContextServices>().CurrentContext.Context;
-            
+
             var entityType = context.Model.FindEntityType(typeof(TEntity));
             var key = entityType.FindPrimaryKey();
 

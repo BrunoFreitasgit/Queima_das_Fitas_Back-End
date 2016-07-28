@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Queima.Web.App.Models;
 using System;
 using System.Collections.Generic;
@@ -39,8 +40,9 @@ namespace Queima.Web.App.ViewModels
         public Palco Palco { get; set; }
         // Foto do(a) Artista
         [DataType(DataType.Upload)]
-        [Display(Name = "Imagem do(a) Artista")]
+        [Display(Name = "Imagem do(a) Artista (jpg,png ou jpeg)")]
         [FileExtensions(Extensions = "jpg,png,jpeg")]
+        [JsonIgnore]
         public IFormFile Imagem { get; set; }
         public string FilePath { get; set; }
 

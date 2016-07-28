@@ -1,12 +1,12 @@
-@model Queima.Web.App.ViewModels.ArtistaViewModel
+﻿@model Queima.Web.App.ViewModels.ArtistaViewModel
 <meta charset="utf-8" />
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Apagar";
 }
 
-<h2>Delete</h2>
+<h2>Apagar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem a certeza que quer apagar este artista?</h3>
 <div>
     <h4>Artista</h4>
     <hr />
@@ -60,7 +60,7 @@
     <form asp-action="Delete">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <a asp-action="Index">Voltar à lista</a>
         </div>
     </form>
 </div>

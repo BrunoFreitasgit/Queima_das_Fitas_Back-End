@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Queima.Web.App", "src\Queima.Web.App\Queima.Web.App.xproj", "{384BA6BF-3BB8-4326-8647-18D2FE7D55AB}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Queima.Web.Api", "src\Queima.Web.Api\Queima.Web.Api.xproj", "{EFAD9BE5-F619-4458-B73F-660780AED290}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,16 @@ Global
 		{384BA6BF-3BB8-4326-8647-18D2FE7D55AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{384BA6BF-3BB8-4326-8647-18D2FE7D55AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{384BA6BF-3BB8-4326-8647-18D2FE7D55AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFAD9BE5-F619-4458-B73F-660780AED290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFAD9BE5-F619-4458-B73F-660780AED290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFAD9BE5-F619-4458-B73F-660780AED290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFAD9BE5-F619-4458-B73F-660780AED290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{384BA6BF-3BB8-4326-8647-18D2FE7D55AB} = {77022442-2017-4EAC-A680-0CC466492F27}
+		{EFAD9BE5-F619-4458-B73F-660780AED290} = {77022442-2017-4EAC-A680-0CC466492F27}
 	EndGlobalSection
 EndGlobal

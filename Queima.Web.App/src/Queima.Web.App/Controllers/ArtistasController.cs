@@ -32,7 +32,9 @@ namespace Queima.Web.App.Controllers
         {
             IEnumerable<Artista> lista = await _repository.FindAll();
             var lista_vm = new List<ArtistaViewModel>();
-
+            // TODO Adicionar URL ao viewmodel para a API
+            var s = HttpContext.Request.ToString();
+            //**************
             foreach (Artista a in lista)
             {
                 var vm = new ArtistaViewModel(a);
@@ -96,7 +98,7 @@ namespace Queima.Web.App.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View(new_artista);
+            return View(vm);
         }
 
         // GET: Artistas/Edit/5
@@ -145,7 +147,7 @@ namespace Queima.Web.App.Controllers
                             await Imagem.CopyToAsync(fileStream);
                         }
                         // apagar imagem antiga
-                        var path = Path.Combine(upload, vm.FilePath);
+                        var path = _env.WebRootPath + vm.FilePath;
                         if (System.IO.File.Exists(path))
                         {
                             System.IO.File.Delete(path);
@@ -153,7 +155,7 @@ namespace Queima.Web.App.Controllers
                         artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
                     }
 
-                    // apagar imagem antiga
+
 
                     artista.Nome = vm.Nome;
                     artista.Biografia = vm.Biografia;
@@ -205,6 +207,11 @@ namespace Queima.Web.App.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var artista = await _repository.Get(id);
+            var path = _env.WebRootPath + artista.ImagemPath;
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
             await _repository.Delete(artista);
 
             return RedirectToAction("Index");

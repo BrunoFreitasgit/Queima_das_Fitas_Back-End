@@ -1,4 +1,4 @@
-@model Queima.Web.App.ViewModels.ArtistaViewModel
+﻿@model Queima.Web.App.ViewModels.ArtistaViewModel
 <meta charset="utf-8" />
 @{
     ViewData["Title"] = "Detalhes";
@@ -53,10 +53,11 @@
             @Html.DisplayFor(model => model.TwitterUrl)
         </dd>
     </dl>
+    <br />
     <h4> Imagem </h4>
     <img src="@Url.Content(Model.FilePath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar à lista</a>
 </div>
