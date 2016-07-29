@@ -1,0 +1,81 @@
+﻿@model Queima.Web.App.ViewModels.ConcursoViewModel
+<meta charset="utf-8" />
+@{
+    ViewData["Title"] = "Criar";
+}
+
+<h2>Criar Concurso</h2>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Concurso</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="TipoConcurso" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="TipoConcurso" asp-items="Html.GetEnumSelectList<Queima.Web.App.Models.TipoConcurso>()"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataInicio" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataInicio" class="form-control datepicker" />
+                <span asp-validation-for="DataInicio" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataFim" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataFim" class="form-control datepicker" />
+                <span asp-validation-for="DataFim" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Url" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Imagem" class="control-label col-md-2"></label>
+            <div>
+                <input asp-for="Imagem" />
+                <span asp-validation-for="Imagem" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Voltar à lista</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DataInicio").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataFim").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+    </script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

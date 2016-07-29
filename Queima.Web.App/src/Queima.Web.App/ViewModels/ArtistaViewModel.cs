@@ -45,7 +45,7 @@ namespace Queima.Web.App.ViewModels
         [JsonIgnore]
         public IFormFile Imagem { get; set; }
         public string FilePath { get; set; }
-
+        public string ImagemUrl { get; set; }
         public ArtistaViewModel(Artista a)
         {
             Id = a.Id;

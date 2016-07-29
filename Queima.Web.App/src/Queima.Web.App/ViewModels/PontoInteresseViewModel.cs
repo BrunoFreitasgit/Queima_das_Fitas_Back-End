@@ -12,9 +12,9 @@ namespace Queima.Web.App.ViewModels
         public int Id { get; set; }
         [Required]
         public string Nome { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
         public string Latitude { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
         public string Longitude { get; set; }
         [Display(Name = "Descrição adicional do Local")]
         public string DescricaoAdicional { get; set; }
@@ -23,7 +23,7 @@ namespace Queima.Web.App.ViewModels
 
         public PontoInteresseViewModel()
         {
-                
+
         }
         public PontoInteresseViewModel(PontoInteresse pt)
         {

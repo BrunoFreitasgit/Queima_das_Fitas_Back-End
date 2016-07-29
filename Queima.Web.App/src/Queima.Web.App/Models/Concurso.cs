@@ -23,9 +23,9 @@ namespace Queima.Web.App.Models
         [Required]
         public string Descricao { get; set; }
         // Imagem do Concurso
-        // Imagem teste
         [Required]
         public string ImagemPath { get; set; }
+        public string ImagemUrl { get; set; }
         // Url do Concurso
         public int LinkId { get; set; }
         public Link Link { get; set; }

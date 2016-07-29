@@ -22,7 +22,7 @@ namespace Queima.Web.App.Models
         // Preço no dia do evento
         [Required]
         public decimal PrecoNoDia { get; set; }
-        // Preço no dia após certa hora (e.g após as 2:00h da manhã)
+        // Preço no dia após certa hora (e.g após as 21:30h)
         [Required]
         public decimal PrecoNoDiaForaHoras { get; set; }
         // Link para bilheteira online 

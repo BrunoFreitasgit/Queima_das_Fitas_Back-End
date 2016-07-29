@@ -8,9 +8,10 @@ using Queima.Web.App.DAL;
 namespace Queima.Web.App.Migrations
 {
     [DbContext(typeof(QueimaDbContext))]
-    partial class QueimaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160729142649_Schema v2")]
+    partial class Schemav2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

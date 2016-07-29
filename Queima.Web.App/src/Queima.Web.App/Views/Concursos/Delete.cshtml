@@ -1,0 +1,54 @@
+﻿@model Queima.Web.App.ViewModels.ConcursoViewModel
+<meta charset="utf-8" />
+@{
+    ViewData["Title"] = "Apagar";
+}
+
+<h2>Apagar</h2>
+
+<h3>Tem a certeza que quer apagar este concurso?</h3>
+<div>
+    <h4>Concurso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoConcurso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoConcurso)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+    </dl>
+    <h4> Imagem </h4>
+    <img src="@Url.Content(Model.ImagemPath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
+
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Voltar à lista</a>
+        </div>
+    </form>
+</div>

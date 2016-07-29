@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Net.Http.Headers;
 using System.IO;
+using Queima.Web.App.Helpers;
 
 namespace Queima.Web.App.Controllers
 {
@@ -32,12 +33,14 @@ namespace Queima.Web.App.Controllers
         {
             IEnumerable<Artista> lista = await _repository.FindAll();
             var lista_vm = new List<ArtistaViewModel>();
+
             // TODO Adicionar URL ao viewmodel para a API
-            var s = HttpContext.Request.ToString();
+            //var s = HttpContext.Request.ToString();
             //**************
             foreach (Artista a in lista)
             {
                 var vm = new ArtistaViewModel(a);
+                // vm.ImagemUrl = s + vm.FilePath;
                 lista_vm.Add(vm);
             }
             return View(lista_vm);
@@ -76,7 +79,7 @@ namespace Queima.Web.App.Controllers
         public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
         {
             Artista new_artista = new Artista();
-            if (ModelState.IsValid && Imagem != null && Imagem.Length > 0 && VerifyFileSize(Imagem) && VerifyFileExtension(Imagem.FileName))
+            if (ModelState.IsValid && Imagem != null && Imagem.Length > 0 && FilesHelper.VerifyFileSize(Imagem) && FilesHelper.VerifyFileExtension(Imagem.FileName))
             {
                 var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
 
@@ -137,7 +140,7 @@ namespace Queima.Web.App.Controllers
                 try
                 {
                     // editar imagem
-                    if (Imagem != null && Imagem.Length > 0 && VerifyFileSize(Imagem) && VerifyFileExtension(Imagem.FileName))
+                    if (Imagem != null && Imagem.Length > 0 && FilesHelper.VerifyFileSize(Imagem) && FilesHelper.VerifyFileExtension(Imagem.FileName))
                     {
                         var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
 
@@ -154,8 +157,6 @@ namespace Queima.Web.App.Controllers
                         }
                         artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
                     }
-
-
 
                     artista.Nome = vm.Nome;
                     artista.Biografia = vm.Biografia;
@@ -180,7 +181,7 @@ namespace Queima.Web.App.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(artista);
+            return View(vm);
         }
 
         // GET: Artistas/Delete/5
@@ -225,26 +226,5 @@ namespace Queima.Web.App.Controllers
             }
             return false;
         }
-
-
-        // TODO MUDAR DE SITIO
-        private bool VerifyFileSize(IFormFile file)
-        {
-            Double fileSize = 0;
-            using (var reader = file.OpenReadStream())
-            {
-                //get filesize in kb
-                fileSize = (reader.Length / 1024);
-            }
-
-            //filesize less than 1MB => true, else => false
-            return (fileSize < 1024) ? true : false;
-        }
-        private bool VerifyFileExtension(string path)
-        {
-            var AllowedExtensions = new string[] { ".jpg", ".png", ".jpeg" };
-            return AllowedExtensions.Contains(Path.GetExtension(path));
-        }
-
     }
 }
