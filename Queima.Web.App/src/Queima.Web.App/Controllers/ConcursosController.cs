@@ -13,6 +13,7 @@ using Queima.Web.App.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Queima.Web.App.Helpers;
 using System.IO;
+using ImageProcessorCore;
 
 namespace Queima.Web.App.Controllers
 {
@@ -35,9 +36,7 @@ namespace Queima.Web.App.Controllers
             IEnumerable<Concurso> lista = await _repository.FindAll();
             var lista_vm = new List<ConcursoViewModel>();
 
-            // TODO Adicionar URL ao viewmodel para a API
-            //var s = HttpContext.Request.ToString();
-            //**************
+           
             foreach (Concurso c in lista)
             {
                 var vm = new ConcursoViewModel(c);
@@ -61,7 +60,7 @@ namespace Queima.Web.App.Controllers
             }
             concurso.Link = await _linkRepository.Get(concurso.LinkId);
             ConcursoViewModel vm = new ConcursoViewModel(concurso);
-            
+
             ViewBag.ImagemPath = vm.ImagemPath;
             ViewBag.Alt = "Não tem imagem associada";
             return View(vm);
@@ -102,18 +101,37 @@ namespace Queima.Web.App.Controllers
                 {
                     await Imagem.CopyToAsync(fileStream);
                 }
+
+                // guardar imagem thumbnail
+                var thumbnail = Path.GetFileNameWithoutExtension(Path.Combine(upload, Imagem.FileName));
+                thumbnail += "_tb";
+                using (var stream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Open))
+                using (var output = new FileStream(Path.Combine(upload, thumbnail + ".jpg"), FileMode.OpenOrCreate))
+                {
+                    Image image = new Image(stream);
+                    image.Resize(image.Width / 2, image.Height / 2)
+                         .Save(output);
+                }
+
+
+
                 concurso.TipoConcurso = vm.TipoConcurso;
                 concurso.Descricao = vm.Descricao;
                 concurso.DataInicio = DateTime.Parse(vm.DataInicio);
                 concurso.DataFim = DateTime.Parse(vm.DataFim);
                 concurso.ImagemPath = "\\imagens\\concursos\\" + Imagem.FileName;
                 concurso.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/concursos/" + Imagem.FileName;
-                Link link = new Link { Categoria = Categoria.Concurso, Descricao = vm.Descricao, Url = vm.Url };
-                await _linkRepository.Save(link);
 
                 // guardar link
-                concurso.Link = link;
-                concurso.LinkId = link.Id;
+                if (vm.Url != null)
+                {
+                    Link link = new Link { Categoria = Categoria.Concurso, Descricao = vm.Descricao, Url = vm.Url };
+                    await _linkRepository.Save(link);
+                    concurso.Link = link;
+                    concurso.LinkId = link.Id;
+                }
+
+
 
 
                 await _repository.Save(concurso);
@@ -154,14 +172,20 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
             Concurso concurso = await _repository.Get(id);
+
             // Só pode existir um concurso de cada tipo na base de dados
             var query = await _repository.FindAll();
+            int count = 0;
             foreach (Concurso c in query)
             {
-                if (c.TipoConcurso == vm.TipoConcurso && vm.TipoConcurso != TipoConcurso.Passatempo)
+                if (c.TipoConcurso == vm.TipoConcurso && vm.TipoConcurso != TipoConcurso.Passatempo && c.Id != concurso.Id)
                 {
-                    return Content("Só pode existir uma gravação de concursos dos tipos: DJ, Cartaz e Bandas)");
+                    count++;
                 }
+            }
+            if (count >= 1)
+            {
+                return Content("Só pode existir uma gravação de concursos dos tipos: DJ, Cartaz e Bandas)");
             }
             /*************************************************************/
             if (ModelState.IsValid)
@@ -173,16 +197,32 @@ namespace Queima.Web.App.Controllers
                     {
                         var upload = Path.Combine(_env.WebRootPath, "imagens", "concursos");
 
-                        // guardar imagem
+                        // guardar imagem tamanho normal
                         using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
                         {
                             await Imagem.CopyToAsync(fileStream);
                         }
+
+                        // guardar imagem thumbnail
+                        var thumbnail = Path.GetFileNameWithoutExtension(Path.Combine(upload, Imagem.FileName));
+                        thumbnail += "_tb";
+                        using (var stream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Open))
+                        using (var output = new FileStream(Path.Combine(upload, thumbnail + ".jpg"), FileMode.OpenOrCreate))
+                        {
+                            Image image = new Image(stream);
+                            image.Resize(image.Width / 2, image.Height / 2)
+                                 .Save(output);
+                        }
+
+
                         // apagar imagem antiga
                         var path = _env.WebRootPath + vm.ImagemPath;
-                        if (System.IO.File.Exists(path))
+                        var tb_path = _env.WebRootPath + "\\imagens\\concursos\\" + Path.GetFileNameWithoutExtension(concurso.ImagemPath);
+                        tb_path += "_tb.jpg";
+                        if (System.IO.File.Exists(path) && System.IO.File.Exists(tb_path))
                         {
                             System.IO.File.Delete(path);
+                            System.IO.File.Delete(tb_path);
                         }
                         concurso.ImagemPath = "\\imagens\\concursos\\" + Imagem.FileName;
                         concurso.ImagemUrl = HttpContext.Request.ToString() + "/imagens/concursos/" + Imagem.FileName;
@@ -192,11 +232,15 @@ namespace Queima.Web.App.Controllers
                     concurso.Descricao = vm.Descricao;
                     concurso.DataInicio = DateTime.Parse(vm.DataInicio);
                     concurso.DataFim = DateTime.Parse(vm.DataFim);
-                    Link link = await _linkRepository.Get(vm.LinkId);
-                    link.Descricao = vm.Descricao;
-                    link.Url = vm.Url;
+                    if (vm.Url != null)
+                    {
+                        Link link = await _linkRepository.Get(concurso.LinkId);
+                        link.Descricao = vm.Descricao;
+                        link.Url = vm.Url;
 
-                    await _linkRepository.Update(link);
+                        await _linkRepository.Update(link);
+
+                    }
                     await _repository.Update(concurso);
                 }
                 catch (DbUpdateConcurrencyException)
