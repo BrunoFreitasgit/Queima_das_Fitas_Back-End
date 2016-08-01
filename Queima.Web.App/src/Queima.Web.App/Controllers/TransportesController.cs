@@ -7,46 +7,44 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Queima.Web.App.DAL;
 using Queima.Web.App.Models;
+using Microsoft.AspNetCore.Hosting;
 using Queima.Web.App.Interfaces;
 using Queima.Web.App.ViewModels;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Net.Http.Headers;
-using System.IO;
 using Queima.Web.App.Helpers;
+using System.IO;
 
 namespace Queima.Web.App.Controllers
 {
-    public class ArtistasController : Controller
+    public class TransportesController : Controller
     {
-        public IGenericRepository<Artista> _repository;
+        public IGenericRepository<Transporte> _repository;
+        public IGenericRepository<Link> _linkRepository;
         private IHostingEnvironment _env;
 
-        public ArtistasController(IGenericRepository<Artista> repository, IHostingEnvironment env)
+        public TransportesController(IGenericRepository<Transporte> repository, IGenericRepository<Link> linkRepo, IHostingEnvironment env)
         {
             _repository = repository;
+            _linkRepository = linkRepo;
             _env = env;
         }
 
-        // GET: Artistas
+        // GET: Transportes
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Artista> lista = await _repository.FindAll();
-            var lista_vm = new List<ArtistaViewModel>();
+            IEnumerable<Transporte> lista = await _repository.FindAll();
+            var lista_vm = new List<TransporteViewModel>();
 
-            // TODO Adicionar URL ao viewmodel para a API
-            //var s = HttpContext.Request.ToString();
-            //**************
-            foreach (Artista a in lista)
+
+            foreach (Transporte t in lista)
             {
-                var vm = new ArtistaViewModel(a);
-                // vm.ImagemUrl = s + vm.FilePath;
+                var vm = new TransporteViewModel(t);
                 lista_vm.Add(vm);
             }
             return View(lista_vm);
         }
 
-        // GET: Artistas/Details/5
+        // GET: Transportes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,34 +52,37 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            var artista = await _repository.Get(id.Value);
-            if (artista == null)
+            var trasnporte = await _repository.Get(id.Value);
+            if (trasnporte == null)
             {
                 return NotFound();
             }
-            ArtistaViewModel vm = new ArtistaViewModel(artista);
-            ViewBag.FilePath = vm.FilePath;
-            ViewBag.Alt = vm.Nome;
+            trasnporte.Link = await _linkRepository.Get(trasnporte.LinkId);
+            TransporteViewModel vm = new TransporteViewModel(trasnporte);
+
+            ViewBag.ImagemPath = vm.ImagemPath;
+            ViewBag.Alt = "Não tem imagem associada";
             return View(vm);
         }
 
-        // GET: Artistas/Create
+        // GET: Transportes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Artistas/Create
+        // POST: Transportes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
+        public async Task<IActionResult> Create([Bind("Id,Descricao,Nome,Url")]  TransporteViewModel vm, IFormFile Imagem)
         {
-            Artista new_artista = new Artista();
+            Transporte transporte = new Transporte();
+
             if (ModelState.IsValid && Imagem != null && Imagem.Length > 0 && FilesHelper.VerifyFileSize(Imagem) && FilesHelper.VerifyFileExtension(Imagem.FileName))
             {
-                var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
+                var upload = Path.Combine(_env.WebRootPath, "imagens", "transportes");
 
                 // guardar imagem
                 using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
@@ -89,23 +90,27 @@ namespace Queima.Web.App.Controllers
                     await Imagem.CopyToAsync(fileStream);
                 }
 
-                new_artista.Nome = vm.Nome;
-                new_artista.Biografia = vm.Biografia;
-                new_artista.DataAtuacao = DateTime.Parse(vm.DataAtuacao);
-                new_artista.FacebookUrl = vm.FacebookUrl;
-                new_artista.TwitterUrl = vm.TwitterUrl;
-                new_artista.SpotifyUrl = vm.SpotifyUrl;
-                new_artista.Palco = vm.Palco;
-                new_artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
-                new_artista.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/artistas/" + Imagem.FileName;
-                await _repository.Save(new_artista);
+                transporte.Nome = vm.Nome;
+                transporte.Descricao = vm.Descricao;
+                transporte.ImagemPath = "\\imagens\\transportes\\" + Imagem.FileName;
+                transporte.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/transportes/" + Imagem.FileName;
 
+                // guardar link
+                if (vm.Url != null)
+                {
+                    Link link = new Link { Categoria = Categoria.Transporte, Descricao = vm.Descricao, Url = vm.Url };
+                    await _linkRepository.Save(link);
+                    transporte.Link = link;
+                    transporte.LinkId = link.Id;
+                }
+
+                await _repository.Save(transporte);
                 return RedirectToAction("Index");
             }
             return View(vm);
         }
 
-        // GET: Artistas/Edit/5
+        // GET: Transportes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -113,29 +118,30 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            var artista = await _repository.Get(id.Value);
-            if (artista == null)
+            var transporte = await _repository.Get(id.Value);
+
+            if (transporte == null)
             {
                 return NotFound();
             }
-
-            var vm = new ArtistaViewModel(artista);
+            transporte.Link = await _linkRepository.Get(transporte.LinkId);
+            TransporteViewModel vm = new TransporteViewModel(transporte);
 
             return View(vm);
         }
 
-        // POST: Artistas/Edit/5
+        // POST: Transportes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,ImagemPath,ImagemUrl,LinkId,Nome,Url")] TransporteViewModel vm, IFormFile Imagem)
         {
             if (id != vm.Id)
             {
                 return NotFound();
             }
-            Artista artista = await _repository.Get(id);
+            Transporte transporte = await _repository.Get(id);
             if (ModelState.IsValid)
             {
                 try
@@ -143,36 +149,40 @@ namespace Queima.Web.App.Controllers
                     // editar imagem
                     if (Imagem != null && Imagem.Length > 0 && FilesHelper.VerifyFileSize(Imagem) && FilesHelper.VerifyFileExtension(Imagem.FileName))
                     {
-                        var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
+                        var upload = Path.Combine(_env.WebRootPath, "imagens", "transportes");
 
-                        // guardar imagem
+                        // guardar imagem tamanho normal
                         using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
                         {
                             await Imagem.CopyToAsync(fileStream);
                         }
+
                         // apagar imagem antiga
-                        var path = _env.WebRootPath + vm.FilePath;
+                        var path = _env.WebRootPath + vm.ImagemPath;
                         if (System.IO.File.Exists(path))
                         {
                             System.IO.File.Delete(path);
                         }
-                        artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
-                        artista.ImagemUrl = HttpContext.Request.ToString() + "/imagens/artistas/" + Imagem.FileName;
+                        transporte.ImagemPath = "\\imagens\\transportes\\" + Imagem.FileName;
+                        transporte.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/transportes/" + Imagem.FileName;
                     }
 
-                    artista.Nome = vm.Nome;
-                    artista.Biografia = vm.Biografia;
-                    artista.DataAtuacao = DateTime.Parse(vm.DataAtuacao);
-                    artista.FacebookUrl = vm.FacebookUrl;
-                    artista.TwitterUrl = vm.TwitterUrl;
-                    artista.SpotifyUrl = vm.SpotifyUrl;
-                    artista.Palco = vm.Palco;
+                    transporte.Nome = vm.Nome;
+                    transporte.Descricao = vm.Descricao;
+                    if (vm.Url != null)
+                    {
+                        Link link = await _linkRepository.Get(transporte.LinkId);
+                        link.Descricao = vm.Descricao;
+                        link.Url = vm.Url;
 
-                    await _repository.Update(artista);
+                        await _linkRepository.Update(link);
+
+                    }
+                    await _repository.Update(transporte);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtistaExists(artista.Id))
+                    if (!TransporteExists(transporte.Id))
                     {
                         return NotFound();
                     }
@@ -183,10 +193,11 @@ namespace Queima.Web.App.Controllers
                 }
                 return RedirectToAction("Index");
             }
+
             return View(vm);
         }
 
-        // GET: Artistas/Delete/5
+        // GET: Transportes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -194,33 +205,38 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            var artista = await _repository.Get(id.Value);
-            if (artista == null)
+            var transporte = await _repository.Get(id.Value);
+            if (transporte == null)
             {
                 return NotFound();
             }
-            var vm = new ArtistaViewModel(artista);
+            var vm = new TransporteViewModel(transporte);
+            Link link = await _linkRepository.Get(transporte.LinkId);
+            vm.Link = link;
+            vm.LinkId = link.Id;
 
             return View(vm);
         }
 
-        // POST: Artistas/Delete/5
+        // POST: Transportes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var artista = await _repository.Get(id);
-            var path = _env.WebRootPath + artista.ImagemPath;
+            var transporte = await _repository.Get(id);
+            var path = _env.WebRootPath + transporte.ImagemPath;
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);
             }
-            await _repository.Delete(artista);
+            await _repository.Delete(transporte);
+            Link link = await _linkRepository.Get(transporte.LinkId);
+            await _linkRepository.Delete(link);
 
             return RedirectToAction("Index");
         }
 
-        private bool ArtistaExists(int id)
+        private bool TransporteExists(int id)
         {
             if (_repository.Get(id) != null)
             {

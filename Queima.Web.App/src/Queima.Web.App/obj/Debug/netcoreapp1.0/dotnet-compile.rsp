@@ -227,6 +227,7 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\BilhetesController
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\ConcursosController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\HomeController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\PontosInteresseController.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\TransportesController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\QueimaDbContext.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\Repository.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Helpers\Extensions.cs
@@ -236,6 +237,10 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160726172805_init
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160726172805_initial schema.Designer.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160729142649_Schema v2.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160729142649_Schema v2.Designer.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801160422_ImagemUrl_Artista.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801160422_ImagemUrl_Artista.Designer.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801170804_ImagemUrl_Transporte.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801170804_ImagemUrl_Transporte.Designer.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\QueimaDbContextModelSnapshot.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Artista.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\AtividadeAcademica.cs
@@ -252,3 +257,4 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\ArtistaViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\AtividadeAcademicaViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\ConcursoViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\PontoInteresseViewModel.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\TransporteViewModel.cs

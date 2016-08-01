@@ -225,7 +225,7 @@ namespace Queima.Web.App.Controllers
                             System.IO.File.Delete(tb_path);
                         }
                         concurso.ImagemPath = "\\imagens\\concursos\\" + Imagem.FileName;
-                        concurso.ImagemUrl = HttpContext.Request.ToString() + "/imagens/concursos/" + Imagem.FileName;
+                        concurso.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/concursos/" + Imagem.FileName;
                     }
 
                     concurso.TipoConcurso = vm.TipoConcurso;
@@ -288,9 +288,12 @@ namespace Queima.Web.App.Controllers
         {
             var concurso = await _repository.Get(id);
             var path = _env.WebRootPath + concurso.ImagemPath;
-            if (System.IO.File.Exists(path))
+            var tb_path = _env.WebRootPath + "\\imagens\\concursos\\" + Path.GetFileNameWithoutExtension(concurso.ImagemPath);
+            tb_path += "_tb.jpg";
+            if (System.IO.File.Exists(path) && System.IO.File.Exists(tb_path))
             {
                 System.IO.File.Delete(path);
+                System.IO.File.Delete(tb_path);
             }
             await _repository.Delete(concurso);
             Link link = await _linkRepository.Get(concurso.LinkId);

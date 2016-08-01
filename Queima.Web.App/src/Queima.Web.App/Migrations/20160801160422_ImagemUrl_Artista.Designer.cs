@@ -8,9 +8,10 @@ using Queima.Web.App.DAL;
 namespace Queima.Web.App.Migrations
 {
     [DbContext(typeof(QueimaDbContext))]
-    partial class QueimaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160801160422_ImagemUrl_Artista")]
+    partial class ImagemUrl_Artista
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -256,8 +257,6 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<string>("ImagemPath")
                         .IsRequired();
-
-                    b.Property<string>("ImagemUrl");
 
                     b.Property<int>("LinkId");
 

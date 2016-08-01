@@ -22,6 +22,7 @@ namespace Queima.Web.App.Models
         // Imagem descritiva do Transporte
         [Required]
         public string ImagemPath { get; set; }
+        public string ImagemUrl { get; set; }
         public Transporte()
         {
 
@@ -36,8 +37,3 @@ namespace Queima.Web.App.Models
         Taxi
     }
 }
-// Imagem teste
-//[Required(ErrorMessage = "Please Upload a Valid Image File")]
-//[DataType(DataType.Upload)]
-//[FileExtensions(Extensions = "jpg,png,gif,jpeg,bmp,svg")]
-//public IFormFile ImagemTransporte { get; set; }

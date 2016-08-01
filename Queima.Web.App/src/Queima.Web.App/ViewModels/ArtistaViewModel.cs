@@ -57,6 +57,7 @@ namespace Queima.Web.App.ViewModels
             SpotifyUrl = a.SpotifyUrl;
             Palco = a.Palco;
             FilePath = a.ImagemPath;
+            ImagemUrl = a.ImagemUrl;
         }
         public ArtistaViewModel()
         {

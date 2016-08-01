@@ -1,0 +1,37 @@
+﻿@model Queima.Web.App.ViewModels.TransporteViewModel
+<meta charset="utf-8" />
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<div>
+    <h4>Transporte</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+    </dl>
+    <br />
+    <h4> Imagem </h4>
+    <img src="@Url.Content(Model.ImagemPath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar à lista</a>
+</div>

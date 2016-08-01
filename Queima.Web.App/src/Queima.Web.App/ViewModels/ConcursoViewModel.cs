@@ -34,7 +34,7 @@ namespace Queima.Web.App.ViewModels
         public string ImagemPath { get; set; }
         public string ImagemUrl { get; set; }
         [DataType(DataType.Upload)]
-        [Display(Name = "Imagem do(a) Concurso (jpg, png ou jpeg)")]
+        [Display(Name = "Imagem do Concurso (jpg, png ou jpeg)")]
         [FileExtensions(Extensions = "jpg,png,jpeg")]
         [JsonIgnore]
         public IFormFile Imagem { get; set; }

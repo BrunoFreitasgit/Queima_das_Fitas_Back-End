@@ -1,0 +1,37 @@
+@model Queima.Web.App.ViewModels.TransporteViewModel
+
+<meta charset="utf-8" />
+@{
+    ViewData["Title"] = "Apagar";
+}
+
+<h2>Apagar</h2>
+
+<h3>Tem a certeza que quer apagar este transporte?</h3>
+<div>
+    <h4>Transporte</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+    </dl>
+    <h4> Imagem </h4>
+    <img src="@Url.Content(Model.ImagemPath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
+
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Voltar à lista</a>
+        </div>
+    </form>
+</div>

@@ -32,6 +32,7 @@ namespace Queima.Web.App.Models
         // Foto do(a) Artista
         [Required]
         public string ImagemPath { get; set; }
+        public string ImagemUrl { get; set; }
 
     }
 
