@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Queima.Web.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Transportes")]
-    public class TransportesController : Controller
+    [Route("api/Media")]
+    public class MediaController : Controller
     {
-        public IGenericRepository<Transporte> _repository;
+        public IGenericRepository<MediaEdicao> _repository;
         public IGenericRepository<Link> _linkRepository;
 
 
-        public TransportesController(IGenericRepository<Transporte> repository, IGenericRepository<Link> linkRepository)
+        public MediaController(IGenericRepository<MediaEdicao> repository, IGenericRepository<Link> linkRepository)
         {
             _repository = repository;
             _linkRepository = linkRepository;
@@ -25,22 +25,22 @@ namespace Queima.Web.Api.Controllers
 
         // GET: api/Transportes
         [HttpGet]
-        public async Task<IEnumerable<TransporteViewModel>> GetConcursos()
+        public async Task<IEnumerable<MediaViewModel>> GetConcursos()
         {
-            IEnumerable<Transporte> lista = await _repository.FindAll();
+            IEnumerable<MediaEdicao> lista = await _repository.FindAll();
             IEnumerable<Link> lista_links = await _linkRepository.FindAll();
-            var lista_vm = new List<TransporteViewModel>();
+            var lista_vm = new List<MediaViewModel>();
 
-            foreach (var transporte in lista)
+            foreach (var media in lista)
             {
-                transporte.Link = lista_links.Single(l => l.Id == transporte.LinkId);
-                var vm = new TransporteViewModel(transporte);
+                media.Link = lista_links.Single(l => l.Id == media.LinkId);
+                var vm = new MediaViewModel(media);
                 lista_vm.Add(vm);
             }
             return lista_vm;
         }
 
-        // GET: api/Transportes/5
+        // GET: api/Media/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTransportes([FromRoute] int id)
         {
@@ -49,11 +49,11 @@ namespace Queima.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            Transporte transporte = await _repository.Get(id);
-            Link link = await _linkRepository.Get(transporte.LinkId);
-            transporte.Link = link;
-            TransporteViewModel vm = new TransporteViewModel(transporte);
-            if (transporte == null)
+            MediaEdicao media = await _repository.Get(id);
+            Link link = await _linkRepository.Get(media.LinkId);
+            media.Link = link;
+            MediaViewModel vm = new MediaViewModel(media);
+            if (media == null)
             {
                 return NotFound();
             }

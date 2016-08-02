@@ -26,7 +26,9 @@ namespace Queima.Web.App.Models
 
     public enum TipoMedia
     {
+        [Display(Name = "Álbum de Fotos")]
         Foto,
+        [Display(Name = "Vídeo")]
         Video
     }
 }

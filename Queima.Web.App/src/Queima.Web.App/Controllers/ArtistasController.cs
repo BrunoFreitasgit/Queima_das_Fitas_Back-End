@@ -34,13 +34,9 @@ namespace Queima.Web.App.Controllers
             IEnumerable<Artista> lista = await _repository.FindAll();
             var lista_vm = new List<ArtistaViewModel>();
 
-            // TODO Adicionar URL ao viewmodel para a API
-            //var s = HttpContext.Request.ToString();
-            //**************
             foreach (Artista a in lista)
             {
                 var vm = new ArtistaViewModel(a);
-                // vm.ImagemUrl = s + vm.FilePath;
                 lista_vm.Add(vm);
             }
             return View(lista_vm);
