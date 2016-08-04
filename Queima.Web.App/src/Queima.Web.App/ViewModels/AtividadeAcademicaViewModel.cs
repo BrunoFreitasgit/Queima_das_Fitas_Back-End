@@ -38,14 +38,12 @@ namespace Queima.Web.App.ViewModels
 
         public int SelectedLocalId { get; set; }
         [Display(Name = "Local de realização da Atividade Académica")]
-        public PontoInteresse SelectedLocal { get; set; }
+        public LocalAtividadeAcademica SelectedLocal { get; set; }
 
         [Display(Name = "Pontos de Venda")]
         public int[] SelectedPontosVenda { get; set; }
 
-        public List<PontoInteresse> PontosInteresse { get; set; }
-
-        public List<PontoInteresse> PontosVenda { get; set; }
+        public List<LocalAtividadeAcademica> PontosInteresse { get; set; }
 
         public AtividadeAcademicaViewModel()
         {
@@ -58,22 +56,11 @@ namespace Queima.Web.App.ViewModels
             Descricao = atividade.Descricao;
             Preco = atividade.Preco;
             Data = atividade.Data;
-            SelectedLocalId = atividade.PontoInteresseId;
+            SelectedLocalId = atividade.LocalAtividadeAcademicaId;
 
-            if (atividade.PontoInteresse != null)
+            if (atividade.LocalAtividadeAcademica != null)
             {
-                SelectedLocal = atividade.PontoInteresse;
-            }
-
-            int i = 0;
-
-            if (atividade.PontosVenda != null)
-            {
-                foreach (var item in atividade.PontosVenda)
-                {
-                    SelectedPontosVenda[i] = item.Id;
-                    i++;
-                }
+                SelectedLocal = atividade.LocalAtividadeAcademica;
             }
         }
     }

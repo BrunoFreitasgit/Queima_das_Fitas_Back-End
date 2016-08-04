@@ -18,8 +18,8 @@ namespace Queima.Web.App.Models
         // Coordenada Longitude do Local
         [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
         public double Longitude { get; set; }
-        // Horário
-        [Display(Name = "Descrição adicional do Local (Horário, dias abertos ao público")]
+        public string Horário { get; set; }
+        [Display(Name = "Descrição adicional do Local")]
         public string DescricaoAdicional { get; set; }
 
         public PontoVenda()

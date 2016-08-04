@@ -1,4 +1,4 @@
-@model Queima.Web.App.ViewModels.PontoInteresseViewModel
+﻿@model Queima.Web.App.ViewModels.LocalAtividadeAcademicaViewModel
 
 @{
     ViewData["Title"] = "Detalhes";
@@ -7,15 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>PontoInteresseViewModel</h4>
+    <h4>Local Atividade Académica</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DescricaoAdicional)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescricaoAdicional)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Latitude)
         </dt>
@@ -33,12 +27,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tipo)
         </dd>
     </dl>
 </div>

@@ -13,11 +13,11 @@ using Queima.Web.App.Helpers;
 
 namespace Queima.Web.App.Controllers
 {
-    public class PontosInteresseController : Controller
+    public class LocalAtividadesAcademicasController : Controller
     {
-        public IGenericRepository<PontoInteresse> _repository;
+        public IGenericRepository<LocalAtividadeAcademica> _repository;
 
-        public PontosInteresseController(IGenericRepository<PontoInteresse> repository)
+        public LocalAtividadesAcademicasController(IGenericRepository<LocalAtividadeAcademica> repository)
         {
             _repository = repository;
         }
@@ -25,12 +25,12 @@ namespace Queima.Web.App.Controllers
         // GET: PontosInteresse
         public async Task<IActionResult> Index()
         {
-            IEnumerable<PontoInteresse> lista = await _repository.FindAll();
-            var lista_vm = new List<PontoInteresseViewModel>();
+            IEnumerable<LocalAtividadeAcademica> lista = await _repository.FindAll();
+            var lista_vm = new List<LocalAtividadeAcademicaViewModel>();
 
-            foreach (PontoInteresse pt in lista)
+            foreach (LocalAtividadeAcademica pt in lista)
             {
-                var vm = new PontoInteresseViewModel(pt);
+                var vm = new LocalAtividadeAcademicaViewModel(pt);
                 lista_vm.Add(vm);
             }
             return View(lista_vm);
@@ -46,7 +46,7 @@ namespace Queima.Web.App.Controllers
             }
 
             var pontoInteresse = await _repository.Get(id.Value);
-            var vm = new PontoInteresseViewModel(pontoInteresse);
+            var vm = new LocalAtividadeAcademicaViewModel(pontoInteresse);
             if (vm == null)
             {
                 return NotFound();
@@ -66,18 +66,17 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresseViewModel pontoInteresseViewModel)
+        public async Task<IActionResult> Create([Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
         {
             if (ModelState.IsValid)
             {
                 if (IsDecimalFormat(pontoInteresseViewModel.Latitude) && IsDecimalFormat(pontoInteresseViewModel.Longitude))
                 {
 
-                    PontoInteresse ponto = new PontoInteresse();
+                    LocalAtividadeAcademica ponto = new LocalAtividadeAcademica();
                     ponto.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
                     ponto.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
                     ponto.Nome = pontoInteresseViewModel.Nome;
-                    ponto.Tipo = pontoInteresseViewModel.Tipo;
 
                     await _repository.Save(ponto);
                 }
@@ -102,7 +101,7 @@ namespace Queima.Web.App.Controllers
             }
 
             var pontoInteresse = await _repository.Get(id.Value);
-            var pontoInteresseViewModel = new PontoInteresseViewModel(pontoInteresse);
+            var pontoInteresseViewModel = new LocalAtividadeAcademicaViewModel(pontoInteresse);
             if (pontoInteresseViewModel == null)
             {
                 return NotFound();
@@ -115,7 +114,7 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome,Tipo")] PontoInteresseViewModel pontoInteresseViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
         {
             if (id != pontoInteresseViewModel.Id)
             {
@@ -131,7 +130,6 @@ namespace Queima.Web.App.Controllers
                     pontoInteresse.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
                     pontoInteresse.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
                     pontoInteresse.Nome = pontoInteresseViewModel.Nome;
-                    pontoInteresse.Tipo = pontoInteresseViewModel.Tipo;
 
                     await _repository.Update(pontoInteresse);
                 }
@@ -148,7 +146,7 @@ namespace Queima.Web.App.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(new PontoInteresseViewModel(pontoInteresse));
+            return View(new LocalAtividadeAcademicaViewModel(pontoInteresse));
         }
 
         // GET: PontosInteresse/Delete/5
@@ -166,7 +164,7 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
 
-            return View(new PontoInteresseViewModel(pontoInteresse));
+            return View(new LocalAtividadeAcademicaViewModel(pontoInteresse));
         }
 
         // POST: PontosInteresse/Delete/5

@@ -226,6 +226,7 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\AtividadesAcademic
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\BilhetesController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\ConcursosController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\HomeController.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\MediaEdicoesController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\PontosInteresseController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Controllers\TransportesController.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\QueimaDbContext.cs
@@ -233,14 +234,8 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\DAL\Repository.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Helpers\Extensions.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Helpers\FilesHelper.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Interfaces\IGenericRepository.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160726172805_initial schema.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160726172805_initial schema.Designer.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160729142649_Schema v2.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160729142649_Schema v2.Designer.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801160422_ImagemUrl_Artista.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801160422_ImagemUrl_Artista.Designer.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801170804_ImagemUrl_Transporte.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160801170804_ImagemUrl_Transporte.Designer.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160804161128_Initial schema.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\20160804161128_Initial schema.Designer.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Migrations\QueimaDbContextModelSnapshot.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Artista.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\AtividadeAcademica.cs
@@ -249,12 +244,13 @@ D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Bilhete.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Bilheteira.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Concurso.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Link.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\LocalAtividadeAcademica.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\MediaEdicao.cs
-D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\PontoInteresse.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\PontoVenda.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\Models\Transporte.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\ArtistaViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\AtividadeAcademicaViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\ConcursoViewModel.cs
+D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\MediaViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\PontoInteresseViewModel.cs
 D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.App\ViewModels\TransporteViewModel.cs

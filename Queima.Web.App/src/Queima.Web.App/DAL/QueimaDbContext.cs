@@ -22,7 +22,7 @@ namespace Queima.Web.App.DAL
         }
         public DbSet<PontoVenda> PontosVenda { get; set; }
         public DbSet<Bilheteira> Bilheteiras { get; set; }
-        public DbSet<PontoInteresse> PontosInteresse { get; set; }
+        public DbSet<LocalAtividadeAcademica> LocaisAtividades { get; set; }
         public DbSet<AtividadeAcademica> Atividades { get; set; }
         public DbSet<Barraca> Barracas { get; set; }
         public DbSet<Artista> Artistas { get; set; }
@@ -33,15 +33,15 @@ namespace Queima.Web.App.DAL
         public DbSet<Bilhete> Bilhetes { get; set; }
         public void EnsureSeedData(IHostingEnvironment env)
         {
-            if (!PontosInteresse.Any())
+            if (!LocaisAtividades.Any())
             {
-                PontosInteresse.AddRange(
-                    new PontoInteresse { Nome = "Coliseu do Porto", Latitude = 41.1469917, Longitude = -8.605416999999989, Tipo = TipoLocal.AtividadeAcademica },
-                    new PontoInteresse { Nome = "Avenida dos Aliados", Latitude = 41.1484572, Longitude = -8.610746400000039, Tipo = TipoLocal.AtividadeAcademica },
-                    new PontoInteresse { Nome = "Aula Magna da Universidade Portucalense", Latitude = 41.1804589, Longitude = -8.605948000000012, Tipo = TipoLocal.AtividadeAcademica },
-                    new PontoInteresse { Nome = "Cidade do Porto", Latitude = 41.1494466, Longitude = -8.607507199999986, Tipo = TipoLocal.AtividadeAcademica },
-                    new PontoInteresse { Nome = "Teatro Sá da Bandeira", Latitude = 41.146793, Longitude = -8.608879099999967, Tipo = TipoLocal.AtividadeAcademica },
-                    new PontoInteresse { Nome = "Casa dos Arcos", Latitude = 41.1657561, Longitude = -8.670960700000023, Tipo = TipoLocal.AtividadeAcademica }
+                LocaisAtividades.AddRange(
+                    new LocalAtividadeAcademica { Nome = "Coliseu do Porto", Latitude = 41.1469917, Longitude = -8.605416999999989 },
+                    new LocalAtividadeAcademica { Nome = "Avenida dos Aliados", Latitude = 41.1484572, Longitude = -8.610746400000039 },
+                    new LocalAtividadeAcademica { Nome = "Aula Magna da Universidade Portucalense", Latitude = 41.1804589, Longitude = -8.605948000000012 },
+                    new LocalAtividadeAcademica { Nome = "Cidade do Porto", Latitude = 41.1494466, Longitude = -8.607507199999986 },
+                    new LocalAtividadeAcademica { Nome = "Teatro Sá da Bandeira", Latitude = 41.146793, Longitude = -8.608879099999967 },
+                    new LocalAtividadeAcademica { Nome = "Casa dos Arcos", Latitude = 41.1657561, Longitude = -8.670960700000023 }
                 );
                 SaveChanges();
             }
@@ -57,18 +57,18 @@ namespace Queima.Web.App.DAL
             }
             if (!Atividades.Any())
             {
-                List<PontoInteresse> pontos = PontosInteresse.Where(x => x.Tipo == TipoLocal.AtividadeAcademica).ToList();
                 List<PontoVenda> pontos_venda = PontosVenda.ToList();
+                List<LocalAtividadeAcademica> locais = LocaisAtividades.ToList();
                 Atividades.AddRange(
                     new AtividadeAcademica
                     {
                         Data = new DateTime(2016, 02, 01),
                         Descricao = "Descrição teste",
-                        PontoInteresse = pontos.ElementAt(0),
+                        LocalAtividadeAcademica = locais.ElementAt(0),
                         Nome = "Sarau Cultural",
-                        PontosVenda = pontos_venda,
+                        PontosVenda = "Coliseu do Porto; FAP",
                         ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
-                        PontoInteresseId = pontos.ElementAt(0).Id,
+                        LocalAtividadeAcademicaId = locais.ElementAt(0).Id,
                         Preco = 3.00m
                     }
                     );

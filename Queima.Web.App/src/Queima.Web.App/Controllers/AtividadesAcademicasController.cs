@@ -14,11 +14,11 @@ namespace Queima.Web.App.Controllers
     public class AtividadesAcademicasController : Controller
     {
         public IGenericRepository<AtividadeAcademica> _repository;
-        public IGenericRepository<PontoInteresse> _pontosRepository;
+        public IGenericRepository<LocalAtividadeAcademica> _pontosRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public AtividadesAcademicasController(IGenericRepository<AtividadeAcademica> repository,
-            IGenericRepository<PontoInteresse> pontosRepository,
+            IGenericRepository<LocalAtividadeAcademica> pontosRepository,
             IHostingEnvironment hostingEnvironment)
         {
             _repository = repository;
@@ -65,10 +65,7 @@ namespace Queima.Web.App.Controllers
                 var local = _pontosRepository.Get(vm.SelectedLocalId);
                 vm.SelectedLocal = await local;
             }
-            if(vm.PontosVenda != null)
-            {
-               
-            }
+
             return View(vm);
         }
 

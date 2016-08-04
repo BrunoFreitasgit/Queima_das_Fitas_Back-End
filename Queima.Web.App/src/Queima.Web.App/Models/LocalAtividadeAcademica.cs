@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Queima.Web.App.Models
 {
-    public class PontoInteresse
+    public class LocalAtividadeAcademica
     {
         // Id do Local
         public int Id { get; set; }
@@ -16,19 +16,10 @@ namespace Queima.Web.App.Models
         // Coordenada Longitude do Local
         [Required(ErrorMessage = "Utilize o '.' como caracter de separação")]
         public double Longitude { get; set; }
-        public TipoLocal Tipo { get; set; }
 
-        public PontoInteresse()
+        public LocalAtividadeAcademica()
         {
 
         }
-    }
-
-    public enum TipoLocal
-    {
-        [Display(Name = "Barraca")]
-        Barraca,
-        [Display(Name = "Atividade Académica")]
-        AtividadeAcademica
     }
 }

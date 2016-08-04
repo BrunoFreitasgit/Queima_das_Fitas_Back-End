@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Queima.Web.App.Migrations
 {
-    public partial class initialschema : Migration
+    public partial class Initialschema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,7 @@ namespace Queima.Web.App.Migrations
                     DataAtuacao = table.Column<DateTime>(nullable: false),
                     FacebookUrl = table.Column<string>(nullable: true),
                     ImagemPath = table.Column<string>(nullable: false),
+                    ImagemUrl = table.Column<string>(nullable: true),
                     Nome = table.Column<string>(nullable: false),
                     Palco = table.Column<int>(nullable: false),
                     SpotifyUrl = table.Column<string>(nullable: true),
@@ -58,19 +59,42 @@ namespace Queima.Web.App.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PontosInteresse",
+                name: "LocaisAtividades",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
-                    Nome = table.Column<string>(nullable: false),
-                    Tipo = table.Column<int>(nullable: false)
+                    Nome = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PontosInteresse", x => x.Id);
+                    table.PrimaryKey("PK_LocaisAtividades", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PontosVenda",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BilheteiraId = table.Column<int>(nullable: true),
+                    DescricaoAdicional = table.Column<string>(nullable: true),
+                    Horário = table.Column<string>(nullable: true),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PontosVenda", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PontosVenda_Bilheteiras_BilheteiraId",
+                        column: x => x.BilheteiraId,
+                        principalTable: "Bilheteiras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,6 +138,7 @@ namespace Queima.Web.App.Migrations
                     DataInicio = table.Column<DateTime>(nullable: false),
                     Descricao = table.Column<string>(nullable: false),
                     ImagemPath = table.Column<string>(nullable: false),
+                    ImagemUrl = table.Column<string>(nullable: true),
                     LinkId = table.Column<int>(nullable: false),
                     TipoConcurso = table.Column<int>(nullable: false)
                 },
@@ -158,6 +183,7 @@ namespace Queima.Web.App.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(nullable: true),
                     ImagemPath = table.Column<string>(nullable: false),
+                    ImagemUrl = table.Column<string>(nullable: true),
                     LinkId = table.Column<int>(nullable: false),
                     Nome = table.Column<int>(nullable: false)
                 },
@@ -179,19 +205,21 @@ namespace Queima.Web.App.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Data = table.Column<DateTime>(nullable: false),
-                    Descricao = table.Column<string>(nullable: false),
-                    ImagemPath = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(nullable: false),
-                    PontoInteresseId = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(nullable: true),
+                    ImagemPath = table.Column<string>(nullable: true),
+                    ImagemUrl = table.Column<string>(nullable: true),
+                    LocalAtividadeAcademicaId = table.Column<int>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    PontosVenda = table.Column<string>(nullable: true),
                     Preco = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Atividades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Atividades_PontosInteresse_PontoInteresseId",
-                        column: x => x.PontoInteresseId,
-                        principalTable: "PontosInteresse",
+                        name: "FK_Atividades_LocaisAtividades_LocalAtividadeAcademicaId",
+                        column: x => x.LocalAtividadeAcademicaId,
+                        principalTable: "LocaisAtividades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -204,6 +232,7 @@ namespace Queima.Web.App.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FacebookEventUrl = table.Column<string>(nullable: true),
                     ImagemPath = table.Column<string>(nullable: false),
+                    ImagemUrl = table.Column<string>(nullable: true),
                     Nome = table.Column<string>(nullable: false),
                     PontoInteresseId = table.Column<int>(nullable: false)
                 },
@@ -211,47 +240,17 @@ namespace Queima.Web.App.Migrations
                 {
                     table.PrimaryKey("PK_Barracas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Barracas_PontosInteresse_PontoInteresseId",
+                        name: "FK_Barracas_LocaisAtividades_PontoInteresseId",
                         column: x => x.PontoInteresseId,
-                        principalTable: "PontosInteresse",
+                        principalTable: "LocaisAtividades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "PontosVenda",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AtividadeAcademicaId = table.Column<int>(nullable: true),
-                    BilheteiraId = table.Column<int>(nullable: true),
-                    DescricaoAdicional = table.Column<string>(nullable: true),
-                    Latitude = table.Column<double>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false),
-                    Nome = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PontosVenda", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PontosVenda_Atividades_AtividadeAcademicaId",
-                        column: x => x.AtividadeAcademicaId,
-                        principalTable: "Atividades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PontosVenda_Bilheteiras_BilheteiraId",
-                        column: x => x.BilheteiraId,
-                        principalTable: "Bilheteiras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_Atividades_PontoInteresseId",
+                name: "IX_Atividades_LocalAtividadeAcademicaId",
                 table: "Atividades",
-                column: "PontoInteresseId");
+                column: "LocalAtividadeAcademicaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Barracas_PontoInteresseId",
@@ -279,11 +278,6 @@ namespace Queima.Web.App.Migrations
                 column: "LinkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PontosVenda_AtividadeAcademicaId",
-                table: "PontosVenda",
-                column: "AtividadeAcademicaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PontosVenda_BilheteiraId",
                 table: "PontosVenda",
                 column: "BilheteiraId");
@@ -298,6 +292,9 @@ namespace Queima.Web.App.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Artistas");
+
+            migrationBuilder.DropTable(
+                name: "Atividades");
 
             migrationBuilder.DropTable(
                 name: "Barracas");
@@ -318,16 +315,13 @@ namespace Queima.Web.App.Migrations
                 name: "Transportes");
 
             migrationBuilder.DropTable(
-                name: "Atividades");
+                name: "LocaisAtividades");
 
             migrationBuilder.DropTable(
                 name: "Bilheteiras");
 
             migrationBuilder.DropTable(
                 name: "Links");
-
-            migrationBuilder.DropTable(
-                name: "PontosInteresse");
         }
     }
 }

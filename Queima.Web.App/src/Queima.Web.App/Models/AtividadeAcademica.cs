@@ -12,32 +12,28 @@ namespace Queima.Web.App.Models
         // Id da Atividade Académica
         public int Id { get; set; }
         // Nome da Atividade Académica
-        [Required]
         public string Nome { get; set; }
         // Descrição da Atividade Académica
-        [Required]
-        public string Descricao { get; set; }
+        public string Descricao { get; set; } = string.Empty;
         // Preço da Atividade Académica
         public decimal Preco { get; set; }
         // Data de realização da Atividade Académica
         public DateTime Data { get; set; }
+        // Url da imagem
+        public string ImagemUrl { get; set; } = string.Empty;
         // Imagem da Atividade Académica
-        [Required]
-        public string ImagemPath { get; set; }
+        public string ImagemPath { get; set; } = string.Empty;
         // Id do Local de realização da Atividade Académica
-        public int PontoInteresseId { get; set; }
+        public int LocalAtividadeAcademicaId { get; set; }
         // Local da Atividade Académica
-        public PontoInteresse PontoInteresse { get; set; }
-        // Lista de pontos de venda
+        public LocalAtividadeAcademica LocalAtividadeAcademica { get; set; }
 
-        public List<PontoVenda> PontosVenda { get; set; }
+        // Lista de pontos de venda
+        public string PontosVenda { get; set; } = string.Empty;
 
         public AtividadeAcademica()
         {
-            PontosVenda = new List<PontoVenda>();
-        }
-        // Imagem da Atividade Académica
-        //public virtual Imagem Imagem { get; set; }
 
+        }
     }
 }

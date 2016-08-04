@@ -17,12 +17,11 @@ namespace Queima.Web.App.Models
         // Evento do Facebook associado à barraca
         public string FacebookEventUrl { get; set; }
         // Foto da Barraca
-        // Imagem teste
         [Required]
         public string ImagemPath { get; set; }
-
+        public string ImagemUrl { get; set; }
         // Posição da Barraca
         public int PontoInteresseId { get; set; }
-        public PontoInteresse PontoInteresse { get; set; }
+        public LocalAtividadeAcademica PontoInteresse { get; set; }
     }
 }
