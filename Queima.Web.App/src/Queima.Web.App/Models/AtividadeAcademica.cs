@@ -12,11 +12,11 @@ namespace Queima.Web.App.Models
         // Id da Atividade Académica
         public int Id { get; set; }
         // Nome da Atividade Académica
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
         // Descrição da Atividade Académica
         public string Descricao { get; set; } = string.Empty;
         // Preço da Atividade Académica
-        public decimal Preco { get; set; }
+        public decimal Preco { get; set; } = decimal.Zero;
         // Data de realização da Atividade Académica
         public DateTime Data { get; set; }
         // Url da imagem

@@ -66,20 +66,17 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (IsDecimalFormat(pontoInteresseViewModel.Latitude) && IsDecimalFormat(pontoInteresseViewModel.Longitude))
-                {
 
-                    LocalAtividadeAcademica ponto = new LocalAtividadeAcademica();
-                    ponto.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
-                    ponto.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
-                    ponto.Nome = pontoInteresseViewModel.Nome;
+                LocalAtividadeAcademica ponto = new LocalAtividadeAcademica();
+                ponto.Latitude = Convert.ToDouble(pontoInteresseViewModel.Latitude);
+                ponto.Longitude = Convert.ToDouble(pontoInteresseViewModel.Longitude);
+                ponto.Nome = pontoInteresseViewModel.Nome;
 
-                    await _repository.Save(ponto);
-                }
+                await _repository.Save(ponto);
 
                 return RedirectToAction("Index");
             }
@@ -114,7 +111,7 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DescricaoAdicional,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Latitude,Longitude,Nome")] LocalAtividadeAcademicaViewModel pontoInteresseViewModel)
         {
             if (id != pontoInteresseViewModel.Id)
             {
@@ -123,7 +120,7 @@ namespace Queima.Web.App.Controllers
             var pontoInteresse = await _repository.Get(pontoInteresseViewModel.Id);
 
 
-            if (ModelState.IsValid && (IsDecimalFormat(pontoInteresseViewModel.Latitude) && IsDecimalFormat(pontoInteresseViewModel.Longitude)))
+            if (ModelState.IsValid)
             {
                 try
                 {

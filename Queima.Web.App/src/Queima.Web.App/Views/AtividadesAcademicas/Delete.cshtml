@@ -1,11 +1,12 @@
 @model Queima.Web.App.Models.AtividadeAcademica
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h2>Details</h2>
+<h2>Delete</h2>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>AtividadeAcademica</h4>
     <hr />
@@ -50,11 +51,14 @@
             @Html.DisplayNameFor(model => model.Preco)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Preco)€
+            @Html.DisplayFor(model => model.Preco)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>

@@ -2,28 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Queima.Web.App.DAL;
 using Queima.Web.App.Models;
 using Queima.Web.App.Interfaces;
-using Queima.Web.App.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Queima.Web.App.ViewModels;
 
 namespace Queima.Web.App.Controllers
 {
     public class AtividadesAcademicasController : Controller
     {
         public IGenericRepository<AtividadeAcademica> _repository;
-        public IGenericRepository<LocalAtividadeAcademica> _pontosRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        public IGenericRepository<LocalAtividadeAcademica> _locaisRepository;
+        private IHostingEnvironment _env;
 
-        public AtividadesAcademicasController(IGenericRepository<AtividadeAcademica> repository,
-            IGenericRepository<LocalAtividadeAcademica> pontosRepository,
-            IHostingEnvironment hostingEnvironment)
+        public AtividadesAcademicasController(IGenericRepository<AtividadeAcademica> repository, IGenericRepository<LocalAtividadeAcademica> localRepo, IHostingEnvironment env)
         {
             _repository = repository;
-            _pontosRepository = pontosRepository;
-            _hostingEnvironment = hostingEnvironment;
+            _locaisRepository = localRepo;
+            _env = env;
         }
 
         // GET: AtividadesAcademicas
@@ -32,105 +32,142 @@ namespace Queima.Web.App.Controllers
             IEnumerable<AtividadeAcademica> lista = await _repository.FindAll();
             var lista_vm = new List<AtividadeAcademicaViewModel>();
 
+
             foreach (AtividadeAcademica a in lista)
             {
                 var vm = new AtividadeAcademicaViewModel(a);
-                if (vm.SelectedLocalId != -1 )
-                {
-                    var local = _pontosRepository.Get(vm.SelectedLocalId);
-                    vm.SelectedLocal = await local;
-                }
+                var local = await _locaisRepository.Get(vm.SelectedLocalId);
+                vm.SelectedLocal = local;
                 lista_vm.Add(vm);
             }
             return View(lista_vm);
         }
 
-        // GET: AtividadesAcademicas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: AtividadesAcademicas/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var atividadeAcademica = await _repository.Get(id.Value);
-            if (atividadeAcademica == null)
-            {
-                return NotFound();
-            }
+        //    var atividadeAcademica = await _context.Atividades.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (atividadeAcademica == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var vm = new AtividadeAcademicaViewModel(atividadeAcademica);
-            if (vm.SelectedLocalId != -1)
-            {
-                var local = _pontosRepository.Get(vm.SelectedLocalId);
-                vm.SelectedLocal = await local;
-            }
+        //    return View(atividadeAcademica);
+        //}
 
-            return View(vm);
-        }
+        //// GET: AtividadesAcademicas/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["LocalAtividadeAcademicaId"] = new SelectList(_context.LocaisAtividades, "Id", "Nome");
+        //    return View();
+        //}
 
-        // GET: AtividadesAcademicas/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// POST: AtividadesAcademicas/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Data,Descricao,ImagemPath,ImagemUrl,LocalAtividadeAcademicaId,Nome,PontosVenda,Preco")] AtividadeAcademica atividadeAcademica)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(atividadeAcademica);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewData["LocalAtividadeAcademicaId"] = new SelectList(_context.LocaisAtividades, "Id", "Nome", atividadeAcademica.LocalAtividadeAcademicaId);
+        //    return View(atividadeAcademica);
+        //}
 
-        // POST: AtividadesAcademicas/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Preco,Data,Imagem, SelectedLocalId, SelectedPontosVenda,")] AtividadeAcademicaViewModel atividadeAcademicaViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(atividadeAcademicaViewModel);
-        }
+        //// GET: AtividadesAcademicas/Edit/5
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // GET: AtividadesAcademicas/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //    var atividadeAcademica = await _context.Atividades.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (atividadeAcademica == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ViewData["LocalAtividadeAcademicaId"] = new SelectList(_context.LocaisAtividades, "Id", "Nome", atividadeAcademica.LocalAtividadeAcademicaId);
+        //    return View(atividadeAcademica);
+        //}
 
-        // POST: AtividadesAcademicas/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: AtividadesAcademicas/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Data,Descricao,ImagemPath,ImagemUrl,LocalAtividadeAcademicaId,Nome,PontosVenda,Preco")] AtividadeAcademica atividadeAcademica)
+        //{
+        //    if (id != atividadeAcademica.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(atividadeAcademica);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!AtividadeAcademicaExists(atividadeAcademica.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewData["LocalAtividadeAcademicaId"] = new SelectList(_context.LocaisAtividades, "Id", "Nome", atividadeAcademica.LocalAtividadeAcademicaId);
+        //    return View(atividadeAcademica);
+        //}
 
-        // GET: AtividadesAcademicas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: AtividadesAcademicas/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // POST: AtividadesAcademicas/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //    var atividadeAcademica = await _context.Atividades.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (atividadeAcademica == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    return View(atividadeAcademica);
+        //}
+
+        //// POST: AtividadesAcademicas/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var atividadeAcademica = await _context.Atividades.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Atividades.Remove(atividadeAcademica);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
+
+        //private bool AtividadeAcademicaExists(int id)
+        //{
+        //    return _context.Atividades.Any(e => e.Id == id);
+        //}
     }
 }

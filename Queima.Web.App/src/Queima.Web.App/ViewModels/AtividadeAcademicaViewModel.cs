@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using Queima.Web.App.Models;
 using System;
 using System.Collections.Generic;
@@ -16,23 +17,27 @@ namespace Queima.Web.App.ViewModels
         public int Id { get; set; }
         [Required]
         [Display(Name = "Nome/Título da Atividade Académica")]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "É necessária uma descrição textual da Atividade Académica")]
-        [Display(Name = "Descrição da atividade")]
-        public string Descricao { get; set; }
+        [Required(ErrorMessage = "É necessária uma descrição da Atividade Académica")]
+        [Display(Name = "Descrição da Atividade")]
+        [StringLength(400)]
+        public string Descricao { get; set; } = string.Empty;
 
-        [Range(0.00, 100.00, ErrorMessage = "Preço tem que estar compreendido entre 0€ e 100€")]
-        public decimal Preco { get; set; }
+        [Required]
+        [RegularExpression("^[0-9][0-9]([.,][0-9]{1,3})?$", ErrorMessage = "Preço tem que estar compreendido entre 0€ e 99€")]
+        [Display(Name = "Preço")]
+        public string Preco { get; set; } = "0.00";
 
-        [Display(Name = "Data de realização da Atividade Académica")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Data { get; set; }
+        [Required(ErrorMessage = "É necessário indicar uma data")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "Data de realização")]
+        public string Data { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "O ficheiro não é válido")]
         [DataType(DataType.Upload)]
+        [Display(Name = "Imagem do Concurso (jpg, png ou jpeg)")]
         [FileExtensions(Extensions = "jpg,png,jpeg")]
+        [JsonIgnore]
         public IFormFile Imagem { get; set; }
 
 
@@ -40,8 +45,8 @@ namespace Queima.Web.App.ViewModels
         [Display(Name = "Local de realização da Atividade Académica")]
         public LocalAtividadeAcademica SelectedLocal { get; set; }
 
-        [Display(Name = "Pontos de Venda")]
-        public int[] SelectedPontosVenda { get; set; }
+        public string ImagemPath { get; set; }
+        public string ImagemUrl { get; set; }
 
         public List<LocalAtividadeAcademica> PontosInteresse { get; set; }
 
@@ -49,13 +54,14 @@ namespace Queima.Web.App.ViewModels
         {
 
         }
+
         public AtividadeAcademicaViewModel(AtividadeAcademica atividade)
         {
             Id = atividade.Id;
             Nome = atividade.Nome;
             Descricao = atividade.Descricao;
-            Preco = atividade.Preco;
-            Data = atividade.Data;
+            Preco = atividade.Preco.ToString();
+            Data = string.Concat(atividade.Data.Day + "/" + atividade.Data.Month + "/" + atividade.Data.Year);
             SelectedLocalId = atividade.LocalAtividadeAcademicaId;
 
             if (atividade.LocalAtividadeAcademica != null)
