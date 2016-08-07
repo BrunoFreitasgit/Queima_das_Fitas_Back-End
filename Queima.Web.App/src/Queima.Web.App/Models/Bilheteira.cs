@@ -8,16 +8,16 @@ namespace Queima.Web.App.Models
     public class Bilheteira
     {
         public int Id { get; set; }
-        public List<Bilhete> Bilhetes { get; set; }
+        public List<Bilhete> Bilhetes { get; set; } = new List<Bilhete>();
         // Condições e informações adicionais
-        public string Condicoes { get; set; }
+        public string Condicoes { get; set; } = string.Empty;
 
-        // Lista de Pontos de Venda
-        public List<PontoVenda> PontosVenda { get; set; }
+        // Preço do Ingresso Semanal
+        public decimal PrecoIngressoSemanal { get; set; } = 0;
 
         public Bilheteira()
         {
-            PontosVenda = new List<PontoVenda>();
+
         }
     }
 }

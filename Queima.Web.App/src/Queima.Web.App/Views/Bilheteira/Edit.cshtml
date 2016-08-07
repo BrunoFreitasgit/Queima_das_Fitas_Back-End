@@ -1,0 +1,99 @@
+@model Queima.Web.App.ViewModels.BilheteiraViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>BilheteiraViewModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Condicoes" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Condicoes" class="form-control" />
+                <span asp-validation-for="Condicoes" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia1" class="form-control" />
+                <span asp-validation-for="DataDia1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia2" class="form-control" />
+                <span asp-validation-for="DataDia2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia3" class="form-control" />
+                <span asp-validation-for="DataDia3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia4" class="form-control" />
+                <span asp-validation-for="DataDia4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia5" class="form-control" />
+                <span asp-validation-for="DataDia5" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia6" class="form-control" />
+                <span asp-validation-for="DataDia6" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia7" class="form-control" />
+                <span asp-validation-for="DataDia7" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataDia8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DataDia8" class="form-control" />
+                <span asp-validation-for="DataDia8" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoIngressoSemanal" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoIngressoSemanal" class="form-control" />
+                <span asp-validation-for="PrecoIngressoSemanal" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

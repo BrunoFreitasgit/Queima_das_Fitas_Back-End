@@ -55,23 +55,157 @@ namespace Queima.Web.App.DAL
                     );
                 SaveChanges();
             }
+
+
+            if (!Bilheteiras.Any())
+            {
+                Bilheteira bilheteira = new Bilheteira { PrecoIngressoSemanal = 40.00m, Condicoes = "Teste Condições" };
+                Bilheteiras.Add(bilheteira);
+                SaveChanges();
+
+                Link link_bilhete1 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 1", Url = "www.online.pt" };
+                Link link_bilhete2 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 2", Url = "www.online.pt" };
+                Link link_bilhete3 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 3", Url = "www.online.pt" };
+                Link link_bilhete4 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 4", Url = "www.online.pt" };
+                Link link_bilhete5 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 5", Url = "www.online.pt" };
+                Link link_bilhete6 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 6", Url = "www.online.pt" };
+                Link link_bilhete7 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 7", Url = "www.online.pt" };
+                Link link_bilhete8 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 8", Url = "www.online.pt" };
+                Link link_ingresso_semanal = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Ingresso Semanal", Url = "www.online.pt" };
+
+                Links.AddRange(link_bilhete1, link_bilhete2, link_bilhete3, link_bilhete4, link_bilhete5, link_bilhete6, link_bilhete7, link_bilhete8, link_ingresso_semanal);
+                SaveChanges();
+
+                Bilhete bilhete_dia1 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 01),
+                    Link = link_bilhete1,
+                    LinkId = link_bilhete1.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia2 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 02),
+                    Link = link_bilhete2,
+                    LinkId = link_bilhete2.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia3 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 03),
+                    Link = link_bilhete3,
+                    LinkId = link_bilhete3.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia4 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 04),
+                    Link = link_bilhete4,
+                    LinkId = link_bilhete4.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia5 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 05),
+                    Link = link_bilhete5,
+                    LinkId = link_bilhete5.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia6 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 06),
+                    Link = link_bilhete6,
+                    LinkId = link_bilhete6.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia7 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 07),
+                    Link = link_bilhete7,
+                    LinkId = link_bilhete7.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+                Bilhete bilhete_dia8 = new Bilhete
+                {
+                    Data = new DateTime(2016, 05, 08),
+                    Link = link_bilhete8,
+                    LinkId = link_bilhete8.Id,
+                    PrecoNormal = 8.00m,
+                    PrecoDiaAnterior = 9.00m,
+                    PrecoNoDia = 10.00m,
+                    PrecoNoDiaForaHoras = 12.00m,
+                    Bilheteira = bilheteira,
+                    BilheteiraId = bilheteira.Id
+                };
+
+                Bilhetes.AddRange(bilhete_dia1, bilhete_dia2, bilhete_dia3, bilhete_dia4, bilhete_dia5, bilhete_dia6, bilhete_dia7, bilhete_dia8);
+                SaveChanges();
+                List<Bilhete> bilhetes_list = new List<Bilhete>();
+                bilhetes_list.Add(bilhete_dia1);
+                bilhetes_list.Add(bilhete_dia2);
+                bilhetes_list.Add(bilhete_dia3);
+                bilhetes_list.Add(bilhete_dia4);
+                bilhetes_list.Add(bilhete_dia5);
+                bilhetes_list.Add(bilhete_dia6);
+                bilhetes_list.Add(bilhete_dia7);
+                bilhetes_list.Add(bilhete_dia8);
+                bilheteira.Bilhetes = bilhetes_list;
+                Bilheteiras.Update(bilheteira);
+                SaveChanges();
+            };
+
             if (!Atividades.Any())
             {
                 List<PontoVenda> pontos_venda = PontosVenda.ToList();
                 List<LocalAtividadeAcademica> locais = LocaisAtividades.ToList();
                 Atividades.AddRange(
-                    new AtividadeAcademica
-                    {
-                        Data = new DateTime(2016, 02, 01),
-                        Descricao = "Descrição teste",
-                        LocalAtividadeAcademica = locais.ElementAt(0),
-                        Nome = "Sarau Cultural",
-                        PontosVenda = "Coliseu do Porto; FAP",
-                        ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
-                        LocalAtividadeAcademicaId = locais.ElementAt(0).Id,
-                        Preco = 3.00m
-                    }
-                    );
+                            new AtividadeAcademica
+                            {
+                                Data = new DateTime(2016, 02, 01),
+                                Descricao = "Descrição teste",
+                                LocalAtividadeAcademica = locais.ElementAt(0),
+                                Nome = "Sarau Cultural",
+                                PontosVenda = "Coliseu do Porto; FAP",
+                                ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
+                                LocalAtividadeAcademicaId = locais.ElementAt(0).Id,
+                                Preco = 3.00m
+                            }
+                            );
                 SaveChanges();
             }
             if (!Artistas.Any())

@@ -25,7 +25,7 @@ namespace Queima.Web.App.ViewModels
         public string Descricao { get; set; } = string.Empty;
 
         [Required]
-        [RegularExpression("^[0-9][0-9]([.,][0-9]{1,3})?$", ErrorMessage = "Preço tem que estar compreendido entre 0€ e 99€")]
+        [RegularExpression("^[0-9][0-9]?([.,][0-9]{1,3})?$", ErrorMessage = "Preço tem que estar compreendido entre 0€ e 99€")]
         [Display(Name = "Preço")]
         public string Preco { get; set; } = "0.00";
 

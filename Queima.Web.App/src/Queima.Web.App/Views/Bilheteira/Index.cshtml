@@ -1,0 +1,89 @@
+@model IEnumerable<Queima.Web.App.ViewModels.BilheteiraViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Condicoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDia8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoIngressoSemanal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condicoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia7)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDia8)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoIngressoSemanal)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
