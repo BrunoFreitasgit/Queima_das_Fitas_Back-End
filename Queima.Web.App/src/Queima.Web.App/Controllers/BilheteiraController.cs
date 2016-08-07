@@ -25,30 +25,18 @@ namespace Queima.Web.App.Controllers
             _linksRepository = linksRepository;
         }
 
-        //// GET: Bilheteira
-        //public async Task<IActionResult> Index()
-        //{
-        //    IEnumerable<Bilheteira> bilheteiras = await _repository.FindAll();
-        //    IEnumerable<Link> links = await _linksRepository.FindAll();
-        //    IEnumerable<Bilhete> bilhetes = await _bilhetesRepository.FindAll();
-        //    Bilheteira bilheteira = bilheteiras.FirstOrDefault();
-        //    BilheteiraViewModel vm = new BilheteiraViewModel(bilheteira);
-
-        //    var links_filtered = links.Where(l => l.Categoria == Categoria.Bilheteira).ToList();
-            
+        // GET: Bilheteira
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<Bilheteira> bilheteiras = await _repository.FindAll();
+            IEnumerable<Link> links = await _linksRepository.FindAll();
+            IEnumerable<Bilhete> bilhetes = await _bilhetesRepository.FindAll();
+            Bilheteira bilheteira = bilheteiras.FirstOrDefault();
+            BilheteiraViewModel vm = new BilheteiraViewModel(bilheteira);
 
 
-
-
-
-
-        //    foreach (Concurso c in lista)
-        //    {
-        //        var vm = new ConcursoViewModel(c);
-        //        lista_vm.Add(vm);
-        //    }
-        //    return View(lista_vm);
-        //}
+            return View(vm);
+        }
 
 
 
