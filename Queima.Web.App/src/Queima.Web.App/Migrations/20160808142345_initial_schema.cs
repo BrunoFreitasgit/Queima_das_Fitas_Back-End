@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Queima.Web.App.Migrations
 {
-    public partial class Initialschema : Migration
+    public partial class initial_schema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,19 +28,6 @@ namespace Queima.Web.App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Artistas", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bilheteiras",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Condicoes = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bilheteiras", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,7 +66,6 @@ namespace Queima.Web.App.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BilheteiraId = table.Column<int>(nullable: true),
                     DescricaoAdicional = table.Column<string>(nullable: true),
                     Horário = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
@@ -89,43 +75,27 @@ namespace Queima.Web.App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PontosVenda", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PontosVenda_Bilheteiras_BilheteiraId",
-                        column: x => x.BilheteiraId,
-                        principalTable: "Bilheteiras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bilhetes",
+                name: "Bilheteiras",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BilheteiraId = table.Column<int>(nullable: false),
-                    Data = table.Column<DateTime>(nullable: false),
-                    LinkId = table.Column<int>(nullable: false),
-                    PrecoDiaAnterior = table.Column<decimal>(nullable: false),
-                    PrecoNoDia = table.Column<decimal>(nullable: false),
-                    PrecoNoDiaForaHoras = table.Column<decimal>(nullable: false),
-                    PrecoNormal = table.Column<decimal>(nullable: false)
+                    Condicoes = table.Column<string>(nullable: true),
+                    LinkId = table.Column<int>(nullable: true),
+                    PrecoIngressoSemanal = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bilhetes", x => x.Id);
+                    table.PrimaryKey("PK_Bilheteiras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bilhetes_Bilheteiras_BilheteiraId",
-                        column: x => x.BilheteiraId,
-                        principalTable: "Bilheteiras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Bilhetes_Links_LinkId",
+                        name: "FK_Bilheteiras_Links_LinkId",
                         column: x => x.LinkId,
                         principalTable: "Links",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,6 +217,37 @@ namespace Queima.Web.App.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Bilhetes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BilheteiraId = table.Column<int>(nullable: false),
+                    Data = table.Column<DateTime>(nullable: false),
+                    LinkId = table.Column<int>(nullable: false),
+                    PrecoDiaAnterior = table.Column<decimal>(nullable: false),
+                    PrecoNoDia = table.Column<decimal>(nullable: false),
+                    PrecoNoDiaForaHoras = table.Column<decimal>(nullable: false),
+                    PrecoNormal = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bilhetes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bilhetes_Bilheteiras_BilheteiraId",
+                        column: x => x.BilheteiraId,
+                        principalTable: "Bilheteiras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bilhetes_Links_LinkId",
+                        column: x => x.LinkId,
+                        principalTable: "Links",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Atividades_LocalAtividadeAcademicaId",
                 table: "Atividades",
@@ -268,6 +269,11 @@ namespace Queima.Web.App.Migrations
                 column: "LinkId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bilheteiras_LinkId",
+                table: "Bilheteiras",
+                column: "LinkId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Concursos_LinkId",
                 table: "Concursos",
                 column: "LinkId");
@@ -276,11 +282,6 @@ namespace Queima.Web.App.Migrations
                 name: "IX_MediaEdicoes_LinkId",
                 table: "MediaEdicoes",
                 column: "LinkId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PontosVenda_BilheteiraId",
-                table: "PontosVenda",
-                column: "BilheteiraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transportes_LinkId",

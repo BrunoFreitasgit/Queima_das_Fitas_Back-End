@@ -217,6 +217,7 @@
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Program.cs"
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Startup.cs"
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Controllers\ArtistasController.cs"
+"D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Controllers\BilheteiraController.cs"
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Controllers\ConcursosController.cs"
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Controllers\MediaController.cs"
 "D:\QueimaWebApp\Queima.Web.App\src\Queima.Web.Api\Controllers\TransportesController.cs"

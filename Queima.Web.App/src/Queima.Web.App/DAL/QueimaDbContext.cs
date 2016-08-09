@@ -71,11 +71,12 @@ namespace Queima.Web.App.DAL
                 Link link_bilhete6 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 6", Url = "www.online.pt" };
                 Link link_bilhete7 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 7", Url = "www.online.pt" };
                 Link link_bilhete8 = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Bilhete dia 8", Url = "www.online.pt" };
-                Link link_ingresso_semanal = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Ingresso Semanal", Url = "www.online.pt" };
+                Link link_ingresso_semanal = new Link { Categoria = Categoria.Bilheteira, Descricao = "Link Ingresso Semanal", Url = "www.ingresso.pt" };
 
                 Links.AddRange(link_bilhete1, link_bilhete2, link_bilhete3, link_bilhete4, link_bilhete5, link_bilhete6, link_bilhete7, link_bilhete8, link_ingresso_semanal);
                 SaveChanges();
-
+                bilheteira.Link = link_ingresso_semanal;
+                bilheteira.LinkId = link_ingresso_semanal.Id;
                 Bilhete bilhete_dia1 = new Bilhete
                 {
                     Data = new DateTime(2016, 05, 01),

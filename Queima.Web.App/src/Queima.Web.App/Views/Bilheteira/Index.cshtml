@@ -1,14 +1,11 @@
-@model IEnumerable<Queima.Web.App.ViewModels.BilheteiraViewModel>
+﻿@model Queima.Web.App.ViewModels.BilheteiraViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bilheteira";
 }
 
-<h2>Index</h2>
+<h2>Bilheteira</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,74 +13,215 @@
                 @Html.DisplayNameFor(model => model.Condicoes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataDia1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia4)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia5)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia6)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia7)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDia8)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PrecoIngressoSemanal)
+            </th>
+            <th>
+                Bilheteira Online
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Condicoes)
+                @Html.DisplayFor(model => model.Condicoes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataDia1)
+                @Html.DisplayFor(model => model.PrecoIngressoSemanal) €
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataDia2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia5)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia6)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia7)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDia8)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecoIngressoSemanal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a>@Html.DisplayFor(model => model.Link.Url)</a>
             </td>
         </tr>
-}
     </tbody>
 </table>
+<h3>Bilhetes</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Dia
+            </th>
+            <th>
+                Preço Normal
+            </th>
+            <th>
+                Preço no dia anterior
+            </th>
+            <th>
+                Preço no dia
+            </th>
+            <th>
+                Preço no dia fora de horas
+            </th>
+            <th>
+                Bilheteira Online
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia1)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia1) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior1) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia1) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras1) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(0).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia2)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia2) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior2) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia2) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras2) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(1).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia3)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia3) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior3) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia3) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras3) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(2).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia4)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia4) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior4) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia4) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras4) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(3).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia5)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia5) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior5) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia5) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras5) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(4).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia6)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia6) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior6) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia6) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras6) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(5).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia7)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia7) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior7) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia7) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras7) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(6).Link.Url)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.DataDia8)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDia8) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoDiaAnterior8) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDia8) €
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PrecoNoDiaForaHoras8) €
+            </td>
+            <td>
+                <a>@Html.DisplayFor(model => model.Bilhetes.ElementAt(7).Link.Url)</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+</h2>

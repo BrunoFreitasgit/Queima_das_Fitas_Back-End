@@ -14,8 +14,7 @@ namespace Queima.Web.App.Models
         [Required]
         public string Url { get; set; }
         // Descricao do link
-        [Required]
-        public string Descricao { get; set; }
+        public string Descricao { get; set; } = string.Empty;
         // Categoria do Link
         [Required]
         public Categoria Categoria { get; set; }

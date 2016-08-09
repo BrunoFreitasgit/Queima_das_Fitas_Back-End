@@ -45,6 +45,7 @@ namespace Queima.Web.App.ViewModels
         [Display(Name = "Url do concurso (Facebook Link)")]
         public string Url { get; set; }
 
+
         public ConcursoViewModel(Concurso c)
         {
             Id = c.Id;

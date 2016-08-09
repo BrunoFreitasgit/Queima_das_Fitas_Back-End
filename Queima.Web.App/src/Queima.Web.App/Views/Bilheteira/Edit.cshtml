@@ -1,24 +1,43 @@
-@model Queima.Web.App.ViewModels.BilheteiraViewModel
+﻿@model Queima.Web.App.ViewModels.BilheteiraViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Bilheteira";
 }
 
-<h2>Edit</h2>
+<h2>Editar Bilheteira</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>BilheteiraViewModel</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="LinkId" />
+        <input type="hidden" asp-for="Link" />
+        <input type="hidden" asp-for="Bilhetes" />
+
         <div class="form-group">
             <label asp-for="Condicoes" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Condicoes" class="form-control" />
+                <textarea asp-for="Condicoes" class="form-control"></textarea>
                 <span asp-validation-for="Condicoes" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="PrecoIngressoSemanal" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoIngressoSemanal" class="form-control" />
+                <span asp-validation-for="PrecoIngressoSemanal" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Url" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 1</h4>
         <div class="form-group">
             <label asp-for="DataDia1" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -27,12 +46,86 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="PrecoDia1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia1" class="form-control" />
+                <span asp-validation-for="PrecoDia1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior1" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia1" class="form-control" />
+                <span asp-validation-for="PrecoNoDia1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras1" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia1" class="form-control" />
+                <span asp-validation-for="LinkDia1" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 2</h4>
+        <div class="form-group">
             <label asp-for="DataDia2" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="DataDia2" class="form-control" />
                 <span asp-validation-for="DataDia2" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="PrecoDia2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia2" class="form-control" />
+                <span asp-validation-for="PrecoDia2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior2" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia2" class="form-control" />
+                <span asp-validation-for="PrecoNoDia2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras2" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia2" class="form-control" />
+                <span asp-validation-for="LinkDia2" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 3</h4>
         <div class="form-group">
             <label asp-for="DataDia3" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -41,12 +134,86 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="PrecoDia3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia3" class="form-control" />
+                <span asp-validation-for="PrecoDia3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior3" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia3" class="form-control" />
+                <span asp-validation-for="PrecoNoDia3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras3" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia3" class="form-control" />
+                <span asp-validation-for="LinkDia3" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 4</h4>
+        <div class="form-group">
             <label asp-for="DataDia4" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="DataDia4" class="form-control" />
                 <span asp-validation-for="DataDia4" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="PrecoDia4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia4" class="form-control" />
+                <span asp-validation-for="PrecoDia4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior4" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia4" class="form-control" />
+                <span asp-validation-for="PrecoNoDia4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras4" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia4" class="form-control" />
+                <span asp-validation-for="LinkDia4" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 5</h4>
         <div class="form-group">
             <label asp-for="DataDia5" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -55,12 +222,86 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="PrecoDia5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia5" class="form-control" />
+                <span asp-validation-for="PrecoDia5" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior5" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior5" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia5" class="form-control" />
+                <span asp-validation-for="PrecoNoDia5" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras5" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras5" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia5" class="form-control" />
+                <span asp-validation-for="LinkDia5" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 6</h4>
+        <div class="form-group">
             <label asp-for="DataDia6" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="DataDia6" class="form-control" />
                 <span asp-validation-for="DataDia6" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="PrecoDia6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia6" class="form-control" />
+                <span asp-validation-for="PrecoDia6" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior6" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior6" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia6" class="form-control" />
+                <span asp-validation-for="PrecoNoDia6" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras6" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras6" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia6" class="form-control" />
+                <span asp-validation-for="LinkDia6" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 7</h4>
         <div class="form-group">
             <label asp-for="DataDia7" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -69,6 +310,43 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="PrecoDia7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDia7" class="form-control" />
+                <span asp-validation-for="PrecoDia7" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior7" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior7" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia7" class="form-control" />
+                <span asp-validation-for="PrecoNoDia7" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras7" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras7" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia7" class="form-control" />
+                <span asp-validation-for="LinkDia7" class="text-danger" />
+            </div>
+        </div>
+        <hr />
+        <h4>Dia 8</h4>
+        <div class="form-group">
             <label asp-for="DataDia8" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="DataDia8" class="form-control" />
@@ -76,10 +354,38 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="PrecoIngressoSemanal" class="col-md-2 control-label"></label>
+            <label asp-for="PrecoDia8" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PrecoIngressoSemanal" class="form-control" />
-                <span asp-validation-for="PrecoIngressoSemanal" class="text-danger" />
+                <input asp-for="PrecoDia8" class="form-control" />
+                <span asp-validation-for="PrecoDia8" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoDiaAnterior8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoDiaAnterior8" class="form-control" />
+                <span asp-validation-for="PrecoDiaAnterior8" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDia8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDia8" class="form-control" />
+                <span asp-validation-for="PrecoNoDia8" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PrecoNoDiaForaHoras8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PrecoNoDiaForaHoras8" class="form-control" />
+                <span asp-validation-for="PrecoNoDiaForaHoras8" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkDia8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LinkDia8" class="form-control" />
+                <span asp-validation-for="LinkDia8" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -91,9 +397,36 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar à bilheteira</a>
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DataDia1").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia2").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia3").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia4").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia5").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia6").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia7").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#DataDia8").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+    </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

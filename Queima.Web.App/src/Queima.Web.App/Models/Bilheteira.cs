@@ -15,6 +15,9 @@ namespace Queima.Web.App.Models
         // Preço do Ingresso Semanal
         public decimal PrecoIngressoSemanal { get; set; } = 0;
 
+        // Link para ingresso semanal
+        public Link Link { get; set; }
+        public int? LinkId { get; set; }
         public Bilheteira()
         {
 

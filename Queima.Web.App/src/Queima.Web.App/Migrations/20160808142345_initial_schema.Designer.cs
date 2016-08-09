@@ -8,8 +8,8 @@ using Queima.Web.App.DAL;
 namespace Queima.Web.App.Migrations
 {
     [DbContext(typeof(QueimaDbContext))]
-    [Migration("20160807220218_alteracao_bilheteira")]
-    partial class alteracao_bilheteira
+    [Migration("20160808142345_initial_schema")]
+    partial class initial_schema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -135,9 +135,13 @@ namespace Queima.Web.App.Migrations
 
                     b.Property<string>("Condicoes");
 
+                    b.Property<int?>("LinkId");
+
                     b.Property<decimal>("PrecoIngressoSemanal");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LinkId");
 
                     b.ToTable("Bilheteiras");
                 });
@@ -295,6 +299,13 @@ namespace Queima.Web.App.Migrations
                         .WithMany()
                         .HasForeignKey("LinkId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Queima.Web.App.Models.Bilheteira", b =>
+                {
+                    b.HasOne("Queima.Web.App.Models.Link", "Link")
+                        .WithMany()
+                        .HasForeignKey("LinkId");
                 });
 
             modelBuilder.Entity("Queima.Web.App.Models.Concurso", b =>
