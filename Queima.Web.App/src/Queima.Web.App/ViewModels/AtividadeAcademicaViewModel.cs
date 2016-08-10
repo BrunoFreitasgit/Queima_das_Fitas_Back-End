@@ -21,7 +21,7 @@ namespace Queima.Web.App.ViewModels
 
         [Required(ErrorMessage = "É necessária uma descrição da Atividade Académica")]
         [Display(Name = "Descrição da Atividade")]
-        [StringLength(400)]
+        [StringLength(500)]
         public string Descricao { get; set; } = string.Empty;
 
         [Required]
@@ -40,15 +40,17 @@ namespace Queima.Web.App.ViewModels
         [JsonIgnore]
         public IFormFile Imagem { get; set; }
 
-
+        [JsonIgnore]
+        [Display(Name = "Local de realização da Atividade Académica")]
         public int SelectedLocalId { get; set; }
         [Display(Name = "Local de realização da Atividade Académica")]
         public LocalAtividadeAcademica SelectedLocal { get; set; }
 
-        public string ImagemPath { get; set; }
-        public string ImagemUrl { get; set; }
+        public string ImagemPath { get; set; } = string.Empty;
+        public string ImagemUrl { get; set; } = string.Empty;
 
-        public List<LocalAtividadeAcademica> PontosInteresse { get; set; }
+        [JsonIgnore]
+        public string PontosVenda { get; set; } = string.Empty;
 
         public AtividadeAcademicaViewModel()
         {
@@ -63,7 +65,9 @@ namespace Queima.Web.App.ViewModels
             Preco = atividade.Preco.ToString();
             Data = string.Concat(atividade.Data.Day + "/" + atividade.Data.Month + "/" + atividade.Data.Year);
             SelectedLocalId = atividade.LocalAtividadeAcademicaId;
-
+            PontosVenda = atividade.PontosVenda;
+            ImagemPath = atividade.ImagemPath;
+            ImagemUrl = atividade.ImagemUrl;
             if (atividade.LocalAtividadeAcademica != null)
             {
                 SelectedLocal = atividade.LocalAtividadeAcademica;

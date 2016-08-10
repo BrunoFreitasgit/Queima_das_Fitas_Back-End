@@ -1,17 +1,26 @@
-@model Queima.Web.App.Models.AtividadeAcademica
+﻿@model Queima.Web.App.ViewModels.AtividadeAcademicaViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit"  enctype="multipart/form-data">
     <div class="form-horizontal">
-        <h4>AtividadeAcademica</h4>
+        <h4>Atividade Académica</h4>
+        <input type="hidden" asp-for="ImagemPath" />
+        <input type="hidden" asp-for="ImagemUrl" />
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Nome" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Data" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -22,36 +31,21 @@
         <div class="form-group">
             <label asp-for="Descricao" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ImagemPath" class="col-md-2 control-label"></label>
+            <label asp-for="Preco" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ImagemPath" class="form-control" />
-                <span asp-validation-for="ImagemPath" class="text-danger" />
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ImagemUrl" class="col-md-2 control-label"></label>
+            <label asp-for="SelectedLocalId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ImagemUrl" class="form-control" />
-                <span asp-validation-for="ImagemUrl" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="LocalAtividadeAcademicaId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="LocalAtividadeAcademicaId" class="form-control" asp-items="ViewBag.LocalAtividadeAcademicaId"></select>
-                <span asp-validation-for="LocalAtividadeAcademicaId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Nome" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger" />
+                <select asp-for="SelectedLocalId" class="form-control" asp-items="ViewBag.LocalAtividadeAcademicaId"></select>
             </div>
         </div>
         <div class="form-group">
@@ -61,11 +55,12 @@
                 <span asp-validation-for="PontosVenda" class="text-danger" />
             </div>
         </div>
+        <img src="@Url.Content(Model.ImagemPath)" alt="Não tem nenhuma imagem associada" asp-append-version="true" />
         <div class="form-group">
-            <label asp-for="Preco" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" class="text-danger" />
+            <label asp-for="Imagem" class="control-label col-md-2"></label>
+            <div>
+                <input asp-for="Imagem" />
+                <span asp-validation-for="Imagem" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
@@ -77,9 +72,14 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar à lista</a>
 </div>
 
 @section Scripts {
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#Data").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+</script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

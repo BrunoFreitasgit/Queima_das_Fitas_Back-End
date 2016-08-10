@@ -1,15 +1,21 @@
-@model Queima.Web.App.Models.AtividadeAcademica
+﻿@model Queima.Web.App.ViewModels.AtividadeAcademicaViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
-    <h4>AtividadeAcademica</h4>
+    <h4>Atividade Académica</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Data)
         </dt>
@@ -23,38 +29,23 @@
             @Html.DisplayFor(model => model.Descricao)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ImagemPath)
+            @Html.DisplayNameFor(model => model.SelectedLocal.Nome)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ImagemPath)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagemUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImagemUrl)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PontosVenda)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PontosVenda)
+            @Html.DisplayFor(model => model.SelectedLocal.Nome)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Preco)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Preco)�
+            @Html.DisplayFor(model => model.Preco)€
         </dd>
     </dl>
+    <br />
+    <h4> Imagem </h4>
+    <img src="@Url.Content(Model.ImagemPath)" alt="@(ViewBag.Alt)" asp-append-version="true" />
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar à lista</a>
 </div>

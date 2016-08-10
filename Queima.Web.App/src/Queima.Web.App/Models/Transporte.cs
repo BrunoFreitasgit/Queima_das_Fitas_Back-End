@@ -34,6 +34,6 @@ namespace Queima.Web.App.Models
     {
         STCP,
         Metro,
-        Taxi
+        Taxi,
     }
 }

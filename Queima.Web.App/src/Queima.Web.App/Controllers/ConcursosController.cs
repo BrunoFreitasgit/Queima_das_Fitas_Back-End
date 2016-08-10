@@ -113,8 +113,6 @@ namespace Queima.Web.App.Controllers
                          .Save(output);
                 }
 
-
-
                 concurso.TipoConcurso = vm.TipoConcurso;
                 concurso.Descricao = vm.Descricao;
                 concurso.DataInicio = DateTime.Parse(vm.DataInicio);

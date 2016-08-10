@@ -190,25 +190,25 @@ namespace Queima.Web.App.DAL
                 SaveChanges();
             };
 
-            if (!Atividades.Any())
-            {
-                List<PontoVenda> pontos_venda = PontosVenda.ToList();
-                List<LocalAtividadeAcademica> locais = LocaisAtividades.ToList();
-                Atividades.AddRange(
-                            new AtividadeAcademica
-                            {
-                                Data = new DateTime(2016, 02, 01),
-                                Descricao = "Descrição teste",
-                                LocalAtividadeAcademica = locais.ElementAt(0),
-                                Nome = "Sarau Cultural",
-                                PontosVenda = "Coliseu do Porto; FAP",
-                                ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
-                                LocalAtividadeAcademicaId = locais.ElementAt(0).Id,
-                                Preco = 3.00m
-                            }
-                            );
-                SaveChanges();
-            }
+            //if (!Atividades.Any())
+            //{
+            //    List<PontoVenda> pontos_venda = PontosVenda.ToList();
+            //    List<LocalAtividadeAcademica> locais = LocaisAtividades.ToList();
+            //    Atividades.AddRange(
+            //                new AtividadeAcademica
+            //                {
+            //                    Data = new DateTime(2016, 02, 01),
+            //                    Descricao = "Descrição teste",
+            //                    LocalAtividadeAcademica = locais.ElementAt(0),
+            //                    Nome = "Sarau Cultural",
+            //                    PontosVenda = "Coliseu do Porto, FAP",
+            //                    ImagemPath = env.WebRootPath + "\\imagens\\atividades\\TOMANEPHOTOS056.jpg",
+            //                    LocalAtividadeAcademicaId = locais.ElementAt(0).Id,
+            //                    Preco = 3.00m
+            //                }
+            //                );
+            //    SaveChanges();
+            //}
             if (!Artistas.Any())
             {
                 Artistas.Add(
