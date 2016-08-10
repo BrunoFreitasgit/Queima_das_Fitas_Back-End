@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Net.Http.Headers;
 using System.IO;
 using Queima.Web.App.Helpers;
+using ImageProcessorCore;
 
 namespace Queima.Web.App.Controllers
 {
@@ -56,7 +57,7 @@ namespace Queima.Web.App.Controllers
                 return NotFound();
             }
             ArtistaViewModel vm = new ArtistaViewModel(artista);
-            ViewBag.FilePath = vm.FilePath;
+            ViewBag.FilePath = vm.ImagemPath;
             ViewBag.Alt = vm.Nome;
             return View(vm);
         }
@@ -83,6 +84,16 @@ namespace Queima.Web.App.Controllers
                 using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
                 {
                     await Imagem.CopyToAsync(fileStream);
+                }
+                // guardar imagem thumbnail
+                var thumbnail = Path.GetFileNameWithoutExtension(Path.Combine(upload, Imagem.FileName));
+                thumbnail += "_tb";
+                using (var stream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Open))
+                using (var output = new FileStream(Path.Combine(upload, thumbnail + ".jpg"), FileMode.OpenOrCreate))
+                {
+                    Image image = new Image(stream);
+                    image.Resize(image.Width / 2, image.Height / 2)
+                         .Save(output);
                 }
 
                 new_artista.Nome = vm.Nome;
@@ -125,7 +136,7 @@ namespace Queima.Web.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,FilePath")] ArtistaViewModel vm, IFormFile Imagem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Biografia,DataAtuacao,FacebookUrl,Nome,Palco,SpotifyUrl,TwitterUrl,ImagemPath,ImagemUrl")] ArtistaViewModel vm, IFormFile Imagem)
         {
             if (id != vm.Id)
             {
@@ -141,16 +152,30 @@ namespace Queima.Web.App.Controllers
                     {
                         var upload = Path.Combine(_env.WebRootPath, "imagens", "artistas");
 
-                        // guardar imagem
+                        // guardar imagem tamanho normal
                         using (var fileStream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Create))
                         {
                             await Imagem.CopyToAsync(fileStream);
                         }
+                        // guardar imagem thumbnail
+                        var thumbnail = Path.GetFileNameWithoutExtension(Path.Combine(upload, Imagem.FileName));
+                        thumbnail += "_tb";
+                        using (var stream = new FileStream(Path.Combine(upload, Imagem.FileName), FileMode.Open))
+                        using (var output = new FileStream(Path.Combine(upload, thumbnail + ".jpg"), FileMode.OpenOrCreate))
+                        {
+                            Image image = new Image(stream);
+                            image.Resize(image.Width / 2, image.Height / 2)
+                                 .Save(output);
+                        }
+
                         // apagar imagem antiga
-                        var path = _env.WebRootPath + vm.FilePath;
-                        if (System.IO.File.Exists(path))
+                        var path = _env.WebRootPath + vm.ImagemPath;
+                        var tb_path = _env.WebRootPath + "\\imagens\\artistas\\" + Path.GetFileNameWithoutExtension(artista.ImagemPath);
+                        tb_path += "_tb.jpg";
+                        if (System.IO.File.Exists(path) && System.IO.File.Exists(tb_path))
                         {
                             System.IO.File.Delete(path);
+                            System.IO.File.Delete(tb_path);
                         }
                         artista.ImagemPath = "\\imagens\\artistas\\" + Imagem.FileName;
                         artista.ImagemUrl = HttpContext.Request.ToString() + "/imagens/artistas/" + Imagem.FileName;

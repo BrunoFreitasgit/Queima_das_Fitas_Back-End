@@ -44,7 +44,7 @@ namespace Queima.Web.App.ViewModels
         [FileExtensions(Extensions = "jpg,png,jpeg")]
         [JsonIgnore]
         public IFormFile Imagem { get; set; }
-        public string FilePath { get; set; }
+        public string ImagemPath { get; set; }
         public string ImagemUrl { get; set; }
         public ArtistaViewModel(Artista a)
         {
@@ -56,7 +56,7 @@ namespace Queima.Web.App.ViewModels
             TwitterUrl = a.TwitterUrl;
             SpotifyUrl = a.SpotifyUrl;
             Palco = a.Palco;
-            FilePath = a.ImagemPath;
+            ImagemPath = a.ImagemPath;
             ImagemUrl = a.ImagemUrl;
         }
         public ArtistaViewModel()
