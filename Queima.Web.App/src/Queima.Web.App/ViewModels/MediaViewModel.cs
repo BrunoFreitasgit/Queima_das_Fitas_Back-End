@@ -27,7 +27,7 @@ namespace Queima.Web.App.ViewModels
         public string Url { get; set; }
         // Título
         [Display(Name = "Título do albúm ou video")]
-        [StringLength(25)]
+        [StringLength(40)]
         public string Titulo { get; set; }
         // Tipo de media do conteúdo
         [Required]

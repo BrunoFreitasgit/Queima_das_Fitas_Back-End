@@ -45,7 +45,7 @@ namespace Queima.Web.App.ViewModels
         public int SelectedLocalId { get; set; }
         [Display(Name = "Local de realização da Atividade Académica")]
         public LocalAtividadeAcademica SelectedLocal { get; set; }
-
+        [JsonIgnore]
         public string ImagemPath { get; set; } = string.Empty;
         public string ImagemUrl { get; set; } = string.Empty;
 

@@ -16,8 +16,10 @@ namespace Queima.Web.App.ViewModels
         // Nome do Tipo de Transporte (STCP, Metro ou Taxi)
         [Required]
         public TipoTransporte Nome { get; set; }
+        [JsonIgnore]
         public int LinkId { get; set; }
         // Link para informações adicionais
+        [JsonIgnore]
         public Link Link { get; set; }
         public string Url { get; set; }
         // Descrição do serviço de Transporte
@@ -25,6 +27,7 @@ namespace Queima.Web.App.ViewModels
         [Display(Name = "Descrição do Transporte (local, horários, etc)")]
         public string Descricao { get; set; }
         // Imagem descritiva do Transporte
+        [JsonIgnore]
         public string ImagemPath { get; set; }
         public string ImagemUrl { get; set; }
         [DataType(DataType.Upload)]

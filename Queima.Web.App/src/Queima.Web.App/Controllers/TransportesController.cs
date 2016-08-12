@@ -94,15 +94,17 @@ namespace Queima.Web.App.Controllers
                 transporte.Descricao = vm.Descricao;
                 transporte.ImagemPath = "\\imagens\\transportes\\" + Imagem.FileName;
                 transporte.ImagemUrl = HttpContext.Request.Host.Host + "/imagens/transportes/" + Imagem.FileName;
-
-                // guardar link
-                if (vm.Url != null)
+                if (vm.Url == null)
                 {
-                    Link link = new Link { Categoria = Categoria.Transporte, Descricao = vm.Descricao, Url = vm.Url };
-                    await _linkRepository.Save(link);
-                    transporte.Link = link;
-                    transporte.LinkId = link.Id;
+                    vm.Url = string.Empty;
                 }
+                // guardar link
+
+                Link link = new Link { Categoria = Categoria.Transporte, Descricao = vm.Descricao, Url = vm.Url };
+                await _linkRepository.Save(link);
+                transporte.Link = link;
+                transporte.LinkId = link.Id;
+
 
                 await _repository.Save(transporte);
                 return RedirectToAction("Index");

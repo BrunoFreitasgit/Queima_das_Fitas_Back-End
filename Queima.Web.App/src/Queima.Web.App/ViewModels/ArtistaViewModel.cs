@@ -44,6 +44,7 @@ namespace Queima.Web.App.ViewModels
         [FileExtensions(Extensions = "jpg,png,jpeg")]
         [JsonIgnore]
         public IFormFile Imagem { get; set; }
+        [JsonIgnore]
         public string ImagemPath { get; set; }
         public string ImagemUrl { get; set; }
         public ArtistaViewModel(Artista a)

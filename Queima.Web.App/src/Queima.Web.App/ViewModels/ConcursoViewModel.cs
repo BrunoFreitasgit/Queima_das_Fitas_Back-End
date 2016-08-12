@@ -31,6 +31,7 @@ namespace Queima.Web.App.ViewModels
         [Display(Name = "Descrição do Concurso")]
         public string Descricao { get; set; }
         // Imagem do Concurso
+        [JsonIgnore]
         public string ImagemPath { get; set; }
         public string ImagemUrl { get; set; }
         [DataType(DataType.Upload)]
@@ -40,7 +41,9 @@ namespace Queima.Web.App.ViewModels
         public IFormFile Imagem { get; set; }
 
         // Url do Concurso
+        [JsonIgnore]
         public int LinkId { get; set; }
+        [JsonIgnore]
         public Link Link { get; set; }
         [Display(Name = "Url do concurso (Facebook Link)")]
         public string Url { get; set; }

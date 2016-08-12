@@ -23,7 +23,7 @@ namespace Queima.Web.Api.Controllers
             _linkRepository = linkRepository;
         }
 
-        // GET: api/Transportes
+        // GET: api/Media
         [HttpGet]
         public async Task<IEnumerable<MediaViewModel>> GetConcursos()
         {
