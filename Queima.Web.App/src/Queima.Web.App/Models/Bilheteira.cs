@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Queima.Web.App.Models
 {
+    [JsonObject]
     public class Bilheteira
     {
         public int Id { get; set; }
@@ -18,6 +20,7 @@ namespace Queima.Web.App.Models
         // Link para ingresso semanal
         public Link Link { get; set; }
         public int? LinkId { get; set; }
+
         public Bilheteira()
         {
 

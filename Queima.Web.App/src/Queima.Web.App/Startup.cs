@@ -37,11 +37,16 @@ namespace Queima.Web.App
             // Add DbContext
             var connection = @"Server=(localdb)\mssqllocaldb;Database=Queima.Web.App.Db;Trusted_Connection=True;";
             services.AddDbContext<QueimaDbContext>(options => options.UseSqlServer(connection));
-           
 
-           
+
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddLogging();
             services.AddTransient(typeof(IGenericRepository<>), typeof(Repository<>));
         }

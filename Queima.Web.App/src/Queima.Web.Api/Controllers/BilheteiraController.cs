@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Queima.Web.Api.DTOs;
 using Queima.Web.App.Interfaces;
 using Queima.Web.App.Models;
 using Queima.Web.App.ViewModels;
@@ -26,15 +27,15 @@ namespace Queima.Web.Api.Controllers
 
         // GET: api/Bilheteira
         [HttpGet]
-        public async Task<BilheteiraViewModel> GetBilheteira()
+        public async Task<BilheteiraDTO> GetBilheteira()
         {
             IEnumerable<Bilheteira> bilheteiras = await _repository.FindAll();
             IEnumerable<Link> links = await _linksRepository.FindAll();
             IEnumerable<Bilhete> bilhetes = await _bilhetesRepository.FindAll();
-            Bilheteira bilheteira = bilheteiras.FirstOrDefault();
-            BilheteiraViewModel b = new BilheteiraViewModel(bilheteira);
+            Bilheteira bilheteira = bilheteiras.Single();
+            BilheteiraDTO dto = new BilheteiraDTO(bilheteira);
 
-            return b;
+            return dto;
         }
     }
 }

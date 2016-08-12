@@ -34,7 +34,11 @@ namespace Queima.Web.Api
             services.AddDbContext<QueimaDbContext>(options => options.UseSqlServer(connection));
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddTransient(typeof(IGenericRepository<>), typeof(Repository<>));
         }
 
