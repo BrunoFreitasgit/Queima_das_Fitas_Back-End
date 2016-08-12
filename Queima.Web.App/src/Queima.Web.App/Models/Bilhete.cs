@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Queima.Web.App.Models
 {
-    [JsonObject]
     public class Bilhete
     {
         // Id do Bilhete
